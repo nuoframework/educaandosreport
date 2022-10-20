@@ -1,0 +1,2495 @@
+                            ▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+                    ▄▄▄▄▄▄▄             ▄▄▄▄▄▄▄▄
+             ▄▄▄▄▄▄▄      ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄
+         ▄▄▄▄     ▄ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ ▄▄▄▄▄▄
+         ▄    ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+         ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ ▄▄▄▄▄       ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+         ▄▄▄▄▄▄▄▄▄▄▄          ▄▄▄▄▄▄               ▄▄▄▄▄▄ ▄
+         ▄▄▄▄▄▄              ▄▄▄▄▄▄▄▄                 ▄▄▄▄ 
+         ▄▄                  ▄▄▄ ▄▄▄▄▄                  ▄▄▄
+         ▄▄                ▄▄▄▄▄▄▄▄▄▄▄▄                  ▄▄
+         ▄            ▄▄ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄   ▄▄
+         ▄      ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+         ▄▄▄▄▄▄▄▄▄▄▄▄▄▄                                ▄▄▄▄
+         ▄▄▄▄▄  ▄▄▄▄▄                       ▄▄▄▄▄▄     ▄▄▄▄
+         ▄▄▄▄   ▄▄▄▄▄                       ▄▄▄▄▄      ▄ ▄▄
+         ▄▄▄▄▄  ▄▄▄▄▄        ▄▄▄▄▄▄▄        ▄▄▄▄▄     ▄▄▄▄▄
+         ▄▄▄▄▄▄  ▄▄▄▄▄▄▄      ▄▄▄▄▄▄▄      ▄▄▄▄▄▄▄   ▄▄▄▄▄ 
+          ▄▄▄▄▄▄▄▄▄▄▄▄▄▄        ▄          ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ 
+         ▄▄▄▄▄▄▄▄▄▄▄▄▄                       ▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+         ▄▄▄▄▄▄▄▄▄▄▄                         ▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+         ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄            ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+          ▀▀▄▄▄   ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄▀▀▀▀▀▀
+               ▀▀▀▄▄▄▄▄      ▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▀▀
+                     ▀▀▀▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▀▀▀
+
+    /---------------------------------------------------------------------------------\
+    |                             Do you like PEASS?                                  |
+    |---------------------------------------------------------------------------------| 
+    |         Get the latest version    :     https://github.com/sponsors/carlospolop |
+    |         Follow on Twitter         :     @carlospolopm                           |
+    |         Respect on HTB            :     SirBroccoli                             |
+    |---------------------------------------------------------------------------------|
+    |                                 Thank you!                                      |
+    \---------------------------------------------------------------------------------/
+          linpeas-ng by carlospolop
+
+ADVISORY: This script should be used for authorized penetration testing and/or educational purposes only. Any misuse of this software will not be the responsibility of the author or of any other collaborator. Use it at your own computers and/or with the computer owner's permission.
+
+Linux Privesc Checklist: https://book.hacktricks.xyz/linux-hardening/linux-privilege-escalation-checklist
+ LEGEND:
+  RED/YELLOW: 95% a PE vector
+  RED: You should take a look to it
+  LightCyan: Users with console
+  Blue: Users without console & mounted devs
+  Green: Common things (users, groups, SUID/SGID, mounts, .sh scripts, cronjobs) 
+  LightMagenta: Your username
+
+ Starting linpeas. Caching Writable Folders...
+
+                               ╔═══════════════════╗
+═══════════════════════════════╣ Basic information ╠═══════════════════════════════
+                               ╚═══════════════════╝
+OS: Linux version 5.4.0-66-generic (buildd@lgw01-amd64-039) (gcc version 9.3.0 (Ubuntu 9.3.0-17ubuntu1~20.04)) #74-Ubuntu SMP Wed Jan 27 22:54:38 UTC 2021
+User & Groups: uid=1000(usuario) gid=1000(usuario) grupos=1000(usuario),4(adm),24(cdrom),30(dip),46(plugdev),114(lpadmin),125(sambashare)
+Hostname: educaandos
+Writable folder: /dev/shm
+[+] /usr/bin/ping is available for network discovery (linpeas can discover hosts, learn more with -h)
+[+] /usr/bin/bash is available for network discovery, port scanning and port forwarding (linpeas can discover hosts, scan ports, and forward ports. Learn more with -h)
+[+] /usr/bin/nc is available for network discovery & port scanning (linpeas can discover hosts and scan ports, learn more with -h)
+
+
+
+ 38  808k   38  315k    0     0  80997      0  0:00:10  0:00:03  0:00:07 80997Caching directories . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . DONE
+
+ 68  808k   68  553k    0     0  22713      0  0:00:36  0:00:24  0:00:12 11646                              ╔════════════════════╗
+══════════════════════════════╣ System Information ╠══════════════════════════════
+                              ╚════════════════════╝
+╔══════════╣ Operative system
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#kernel-exploits
+Linux version 5.4.0-66-generic (buildd@lgw01-amd64-039) (gcc version 9.3.0 (Ubuntu 9.3.0-17ubuntu1~20.04)) #74-Ubuntu SMP Wed Jan 27 22:54:38 UTC 2021
+Distributor ID:	Educaandos
+Description:	EducaAndOS 20.04
+Release:	20.04
+Codename:	focal
+
+╔══════════╣ Sudo version
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#sudo-version
+Sudo versión 1.8.31
+
+╔══════════╣ CVEs Check
+Vulnerable to CVE-2021-4034
+
+Vulnerable to CVE-2021-3560
+
+Potentially Vulnerable to CVE-2022-2588
+
+
+╔══════════╣ USBCreator
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation/d-bus-enumeration-and-command-injection-privilege-escalation
+
+╔══════════╣ PATH
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#writable-path-abuses
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-14-oracle/bin:/usr/lib/jvm/java-14-oracle/db/bin
+New path exported: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-14-oracle/bin:/usr/lib/jvm/java-14-oracle/db/bin
+
+╔══════════╣ Date & uptime
+jue 20 oct 2022 12:24:14 CEST
+ 12:24:14 up 4 min,  1 user,  load average: 0,88, 0,52, 0,24
+
+╔══════════╣ Any sd*/disk* disk in /dev? (limit 20)
+disk
+sda
+sda1
+sda2
+sda3
+sda4
+sda5
+
+╔══════════╣ Unmounted file-system?
+╚ Check if you can mount umounted devices
+UUID=0f853fa9-249e-414c-8c7a-0f2a15d05fc8 /               ext4    errors=remount-ro 0       1
+UUID=A7F0-EE0B  /boot/efi       vfat    umask=0077      0       1
+/swapfile                                 none            swap    sw              0       0
+
+╔══════════╣ Environment
+╚ Any private information inside environment variables?
+GJS_DEBUG_TOPICS=JS ERROR;JS LOG
+LESSOPEN=| /usr/bin/lesspipe %s
+HISTFILESIZE=0
+LANGUAGE=es_ES:
+J2SDKDIR=/usr/lib/jvm/java-14-oracle
+USER=usuario
+SSH_AGENT_PID=1447
+XDG_SESSION_TYPE=x11
+J2REDIR=/usr/lib/jvm/java-14-oracle
+SHLVL=0
+QT4_IM_MODULE=ibus
+HOME=/home/usuario
+DESKTOP_SESSION=ubuntu
+GNOME_SHELL_SESSION_MODE=ubuntu
+GTK_MODULES=gail:atk-bridge
+MANAGERPID=1250
+DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+COLORTERM=truecolor
+MANDATORY_PATH=/usr/share/gconf/ubuntu.mandatory.path
+IM_CONFIG_PHASE=1
+GTK_IM_MODULE=ibus
+LOGNAME=usuario
+JOURNAL_STREAM=9:27238
+_=/usr/bin/sh
+XDG_SESSION_CLASS=user
+DEFAULTS_PATH=/usr/share/gconf/ubuntu.default.path
+USERNAME=usuario
+TERM=xterm-256color
+GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+GTK2_MODULES=overlay-scrollbar
+WINDOWPATH=2
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-14-oracle/bin:/usr/lib/jvm/java-14-oracle/db/bin
+SESSION_MANAGER=local/educaandos:@/tmp/.ICE-unix/1559,unix/educaandos:/tmp/.ICE-unix/1559
+DERBY_HOME=/usr/lib/jvm/java-14-oracle/db
+INVOCATION_ID=ae75c694ea0442cfaa1d1301afac2021
+XDG_MENU_PREFIX=gnome-
+GNOME_TERMINAL_SCREEN=/org/gnome/Terminal/screen/b6d9e674_59d7_4cce_8b4c_33979299eba5
+XDG_RUNTIME_DIR=/run/user/1000
+DISPLAY=:0
+LANG=es_ES.UTF-8
+XDG_CURRENT_DESKTOP=ubuntu:GNOME
+HISTSIZE=0
+XMODIFIERS=@im=ibus
+XDG_SESSION_DESKTOP=ubuntu
+XAUTHORITY=/run/user/1000/gdm/Xauthority
+LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
+GNOME_TERMINAL_SERVICE=:1.167
+SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
+SHELL=/bin/bash
+QT_ACCESSIBILITY=1
+GDMSESSION=ubuntu
+LESSCLOSE=/usr/bin/lesspipe %s %s
+GPG_AGENT_INFO=/run/user/1000/gnupg/S.gpg-agent:0:1
+GJS_DEBUG_OUTPUT=stderr
+QT_IM_MODULE=ibus
+JAVA_HOME=/usr/lib/jvm/java-14-oracle
+PWD=/home/usuario
+XDG_CONFIG_DIRS=/etc/xdg/xdg-ubuntu:/etc/xdg
+CLUTTER_IM_MODULE=ibus
+XDG_DATA_DIRS=/usr/share/eos:/usr/share/ubuntu:/usr/local/share/:/usr/share/
+HISTFILE=/dev/null
+VTE_VERSION=6003
+
+╔══════════╣ Searching Signature verification failed in dmesg
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#dmesg-signature-verification-failed
+dmesg Not Found
+
+╔══════════╣ Executing Linux Exploit Suggester
+╚ https://github.com/mzet-/linux-exploit-suggester
+[+] [CVE-2022-2586] nft_object UAF
+
+   Details: https://www.openwall.com/lists/oss-security/2022/08/29/5
+   Exposure: probable
+   Tags: [ ubuntu=(20.04) ]{kernel:5.12.13}
+   Download URL: https://www.openwall.com/lists/oss-security/2022/08/29/5/1
+   Comments: kernel.unprivileged_userns_clone=1 required (to obtain CAP_NET_ADMIN)
+
+[+] [CVE-2021-4034] PwnKit
+
+   Details: https://www.qualys.com/2022/01/25/cve-2021-4034/pwnkit.txt
+   Exposure: probable
+   Tags: [ ubuntu=10|11|12|13|14|15|16|17|18|19|20|21 ],debian=7|8|9|10|11,fedora,manjaro
+   Download URL: https://codeload.github.com/berdav/CVE-2021-4034/zip/main
+
+[+] [CVE-2021-3156] sudo Baron Samedit
+
+   Details: https://www.qualys.com/2021/01/26/cve-2021-3156/baron-samedit-heap-based-overflow-sudo.txt
+   Exposure: probable
+   Tags: mint=19,[ ubuntu=18|20 ], debian=10
+   Download URL: https://codeload.github.com/blasty/CVE-2021-3156/zip/main
+
+[+] [CVE-2021-3156] sudo Baron Samedit 2
+
+   Details: https://www.qualys.com/2021/01/26/cve-2021-3156/baron-samedit-heap-based-overflow-sudo.txt
+   Exposure: probable
+   Tags: centos=6|7|8,[ ubuntu=14|16|17|18|19|20 ], debian=9|10
+   Download URL: https://codeload.github.com/worawit/CVE-2021-3156/zip/main
+
+[+] [CVE-2021-22555] Netfilter heap out-of-bounds write
+
+   Details: https://google.github.io/security-research/pocs/linux/cve-2021-22555/writeup.html
+   Exposure: probable
+   Tags: [ ubuntu=20.04 ]{kernel:5.8.0-*}
+   Download URL: https://raw.githubusercontent.com/google/security-research/master/pocs/linux/cve-2021-22555/exploit.c
+   ext-url: https://raw.githubusercontent.com/bcoles/kernel-exploits/master/CVE-2021-22555/exploit.c
+   Comments: ip_tables kernel module must be loaded
+
+[+] [CVE-2022-32250] nft_object UAF (NFT_MSG_NEWSET)
+
+   Details: https://research.nccgroup.com/2022/09/01/settlers-of-netlink-exploiting-a-limited-uaf-in-nf_tables-cve-2022-32250/
+https://blog.theori.io/research/CVE-2022-32250-linux-kernel-lpe-2022/
+   Exposure: less probable
+   Tags: ubuntu=(22.04){kernel:5.15.0-27-generic}
+   Download URL: https://raw.githubusercontent.com/theori-io/CVE-2022-32250-exploit/main/exp.c
+   Comments: kernel.unprivileged_userns_clone=1 required (to obtain CAP_NET_ADMIN)
+
+[+] [CVE-2017-5618] setuid screen v4.5.0 LPE
+
+   Details: https://seclists.org/oss-sec/2017/q1/184
+   Exposure: less probable
+   Download URL: https://www.exploit-db.com/download/https://www.exploit-db.com/exploits/41154
+
+
+╔══════════╣ Executing Linux Exploit Suggester 2
+╚ https://github.com/jondonas/linux-exploit-suggester-2
+
+╔══════════╣ Protections
+═╣ AppArmor enabled? .............. /etc/apparmor  /etc/apparmor.d
+═╣ grsecurity present? ............ grsecurity Not Found
+═╣ PaX bins present? .............. PaX Not Found
+═╣ Execshield enabled? ............ Execshield Not Found
+═╣ SELinux enabled? ............... sestatus Not Found
+═╣ Seccomp enabled? ............... disabled
+═╣ AppArmor profile? .............. unconfined
+═╣ User namespace? ................ enabled
+═╣ Cgroup2 enabled? ............... enabled
+═╣ Is ASLR enabled? ............... Yes
+═╣ Printer? ....................... No
+═╣ Is this a virtual machine? ..... No
+
+                                   ╔═══════════╗
+═══════════════════════════════════╣ Container ╠═══════════════════════════════════
+                                   ╚═══════════╝
+╔══════════╣ Container related tools present
+╔══════════╣ Am I Containered?
+╔══════════╣ Container details
+═╣ Is this a container? ........... No
+═╣ Any running containers? ........ No
+
+
+                                     ╔═══════╗
+═════════════════════════════════════╣ Cloud ╠═════════════════════════════════════
+                                     ╚═══════╝
+═╣ Google Cloud Platform? ............... No
+═╣ AWS ECS? ............................. No
+═╣ AWS EC2? ............................. No
+═╣ AWS Lambda? .......................... No
+
+
+
+                ╔════════════════════════════════════════════════╗
+════════════════╣ Processes, Crons, Timers, Services and Sockets ╠════════════════
+                ╚════════════════════════════════════════════════╝
+╔══════════╣ Cleaned processes
+╚ Check weird & unexpected proceses run by root: https://book.hacktricks.xyz/linux-hardening/privilege-escalation#processes
+root         879  0.0  0.0   2488   576 ?        S    12:19   0:00  _ bpfilter_umh
+root           1  0.4  0.2 101744 11336 ?        Ss   12:19   0:01 /sbin/init splash
+root         229  0.1  0.6  54036 26580 ?        S<s  12:19   0:00 /lib/systemd/systemd-journald
+root         256  0.2  0.1  22640  6180 ?        Ss   12:19   0:00 /lib/systemd/systemd-udevd
+systemd+     379  0.0  0.3  24088 12096 ?        Ss   12:19   0:00 /lib/systemd/systemd-resolved
+systemd+     380  0.0  0.1  90444  6312 ?        Ssl  12:19   0:00 /lib/systemd/systemd-timesyncd
+  └─(Caps) 0x0000000002000000=cap_sys_time
+root         430  0.0  0.1 246568  7556 ?        Ssl  12:19   0:00 /usr/lib/accountsservice/accounts-daemon[0m
+root         431  0.0  0.0   2540   708 ?        Ss   12:19   0:00 /usr/sbin/acpid
+avahi        440  0.0  0.0   8100   292 ?        S    12:19   0:00  _ avahi-daemon: chroot helper
+root         441  0.0  0.0  17492  2820 ?        Ss   12:19   0:00 /usr/sbin/cron -f
+root         442  0.0  0.2  36272  8460 ?        Ss   12:19   0:00 /usr/sbin/cupsd -l
+lp           463  0.0  0.1  15324  6504 ?        S    12:19   0:00  _ /usr/lib/cups/notifier/dbus dbus://
+message+     443  0.2  0.1   8784  5776 ?        Ss   12:19   0:00 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+  └─(Caps) 0x0000000020000000=cap_audit_write
+root         450  0.0  0.5 270792 20028 ?        Ssl  12:19   0:00 /usr/sbin/NetworkManager --no-daemon[0m
+syslog       479  0.0  0.1 224276  4216 ?        Ssl  12:19   0:00 /usr/sbin/rsyslogd -n -iNONE
+root         490  0.0  0.2  16956  8476 ?        Ss   12:19   0:00 /lib/systemd/systemd-logind
+root         491  0.0  0.2 389616 11648 ?        Ssl  12:19   0:00 /usr/lib/udisks2/udisksd
+root         498  0.0  0.1  13676  4964 ?        Ss   12:19   0:00 /sbin/wpa_supplicant -u -s -O /run/wpa_supplicant
+root         539  0.0  0.3 178384 12780 ?        Ssl  12:19   0:00 /usr/sbin/cups-browsed
+root         541  0.2  0.2 234520  9012 ?        Ssl  12:19   0:00 /usr/lib/policykit-1/polkitd --no-debug
+kernoops     867  0.0  0.0  11252   444 ?        Ss   12:19   0:00 /usr/sbin/kerneloops --test
+root         870  0.0  1.1 126724 45668 ?        Ss   12:19   0:00 /usr/bin/python3 /usr/bin/ticboxcloud-user-service
+whoopsie     872  0.0  0.3 253124 15572 ?        Ssl  12:19   0:00 /usr/bin/whoopsie -f
+kernoops     876  0.0  0.0  11252   444 ?        Ss   12:19   0:00 /usr/sbin/kerneloops
+root         886  0.0  0.2 247852  8624 ?        Ssl  12:19   0:00 /usr/sbin/gdm3
+usuario     1313  0.0  0.1 172256  6576 tty2     Ssl+ 12:19   0:00      _ /usr/lib/gdm3/gdm-x-session --run-script env GNOME_SHELL_SESSION_MODE=ubuntu /usr/bin/gnome-session --systemd --session=ubuntu
+usuario     1315  7.1  2.5 568592 102556 tty2    Sl+  12:19   0:19          _ /usr/lib/xorg/Xorg vt2 -displayfd 3 -auth /run/user/1000/gdm/Xauthority -background none -noreset -keeptty -verbose 3
+usuario     1372  0.0  0.3 196704 14208 tty2     Sl+  12:19   0:00          _ /usr/libexec/gnome-session-binary --systemd --systemd --session=ubuntu
+usuario     1447  0.0  0.0   6032   452 ?        Ss   12:19   0:00              _ /usr/bin/ssh-agent /usr/bin/im-launch env GNOME_SHELL_SESSION_MODE=ubuntu /usr/bin/gnome-session --systemd --session=ubuntu
+root        1012  0.0  0.2 260460  9732 ?        Ssl  12:19   0:00 /usr/lib/upower/upowerd
+root        1068  0.2  0.5 441424 23188 ?        Ssl  12:19   0:00 /usr/lib/packagekit/packagekitd
+colord      1203  0.0  0.3 254580 14768 ?        Ssl  12:19   0:00 /usr/libexec/colord
+usuario     1250  0.1  0.2  19188 10556 ?        Ss   12:19   0:00 /lib/systemd/systemd --user
+usuario     1251  0.0  0.0 107000  3088 ?        S    12:19   0:00  _ (sd-pam)
+usuario     1270  0.0  0.4 966844 19740 ?        Ssl  12:19   0:00  _ /usr/bin/pulseaudio --daemonize=no --log-target=journal
+usuario     1272  0.0  0.6 593632 24796 ?        SNsl 12:19   0:00  _ /usr/libexec/tracker-miner-fs
+usuario     1275  0.2  0.1   9640  6816 ?        Ss   12:19   0:00  _ /usr/bin/dbus-daemon[0m --session --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+usuario     1295  0.0  0.2 247980  7988 ?        Ssl  12:19   0:00  _ /usr/libexec/gvfsd
+usuario     2077  0.0  0.2 322244  8036 ?        Sl   12:19   0:00  |   _ /usr/libexec/gvfsd-trash --spawner :1.3 /org/gtk/gvfs/exec_spaw/0
+usuario     1300  0.0  0.1 378336  6472 ?        Sl   12:19   0:00  _ /usr/libexec/gvfsd-fuse /run/user/1000/gvfs -f -o big_writes
+usuario     1301  0.0  0.2 322408  9644 ?        Ssl  12:19   0:00  _ /usr/libexec/gvfs-udisks2-volume-monitor
+usuario     1317  0.0  0.1 244144  6004 ?        Ssl  12:19   0:00  _ /usr/libexec/gvfs-goa-volume-monitor
+usuario     1322  0.0  0.9 548436 36048 ?        Sl   12:19   0:00  _ /usr/libexec/goa-daemon[0m
+usuario     1330  0.0  0.2 323144  9152 ?        Sl   12:19   0:00  _ /usr/libexec/goa-identity-service
+usuario     1338  0.0  0.2 324992  8812 ?        Ssl  12:19   0:00  _ /usr/libexec/gvfs-afc-volume-monitor
+usuario     1347  0.0  0.1 246216  6848 ?        Ssl  12:19   0:00  _ /usr/libexec/gvfs-gphoto2-volume-monitor
+usuario     1353  0.0  0.1 243940  6264 ?        Ssl  12:19   0:00  _ /usr/libexec/gvfs-mtp-volume-monitor
+usuario     1478  0.0  0.1 244852  7480 ?        Sl   12:19   0:00  _ /usr/libexec/ibus-portal
+usuario     1488  0.0  0.1 305512  6620 ?        Ssl  12:19   0:00  _ /usr/libexec/at-spi-bus-launcher
+usuario     1493  0.0  0.1   7124  4020 ?        S    12:19   0:00  |   _ /usr/bin/dbus-daemon[0m --config-file=/usr/share/defaults/at-spi2/accessibility.conf --nofork --print-address 3
+usuario     1506  0.0  0.1 162900  6452 ?        Sl   12:19   0:00  _ /usr/libexec/at-spi2-registryd --use-gnome-session
+usuario     1519  0.0  0.2 397068 10148 ?        Ssl  12:19   0:00  _ /usr/libexec/xdg-desktop-portal
+usuario     1527  0.0  0.1 465892  6652 ?        Ssl  12:19   0:00  _ /usr/libexec/xdg-document-portal
+usuario     1531  0.0  0.1 243968  4636 ?        Ssl  12:19   0:00  _ /usr/libexec/xdg-permission-store
+usuario     1549  0.0  0.1 248136  7740 ?        Sl   12:19   0:00  _ /usr/bin/gnome-keyring-daemon[0m --start --foreground --components=secrets
+  └─(Caps) 0x0000000000004000=cap_ipc_lock
+usuario     1550  0.0  0.1  98304  4360 ?        Ssl  12:19   0:00  _ /usr/libexec/gnome-session-ctl --monitor
+usuario     1559  0.0  0.4 567256 16852 ?        Ssl  12:19   0:00  _ /usr/libexec/gnome-session-binary --systemd-service --session=ubuntu
+usuario     1649  0.0  1.4 783552 56068 ?        Sl   12:19   0:00  |   _ /usr/libexec/evolution-data-server/evolution-alarm-notify
+usuario     1659  0.0  0.9 218740 38664 ?        Sl   12:19   0:00  |   _ python2 /usr/bin/cga-autologout-client
+usuario     1701  0.0  0.0   2608   592 ?        S    12:19   0:00  |   _ sh -c sleep 30 && /usr/bin/cga-update-manager
+usuario     2163  0.0  0.0  17572  3404 ?        S    12:20   0:00  |   |   _ /bin/bash /usr/bin/cga-update-manager
+usuario     2169  0.3  1.5 389180 61852 ?        SNl  12:20   0:00  |   |       _ /usr/bin/python3 /usr/share/pyshared/cga-update-manager/upgrade_system.py
+usuario     1708  0.0  0.1 231792  5548 ?        Sl   12:19   0:00  |   _ /usr/libexec/gsd-disk-utility-notify
+usuario     2132  0.0  0.4 481512 17324 ?        Sl   12:20   0:00  |   _ zeitgeist-datahub
+usuario     2539  0.0  0.5 274588 22780 ?        Sl   12:20   0:00  |   _ update-notifier
+usuario     2555  0.9  2.0 794804 80788 ?        Sl   12:20   0:01  |   _ /usr/bin/gnome-software --gapplication-service
+usuario     1577 19.2 12.9 4063876 514840 ?      Ssl  12:19   0:51  _ /usr/bin/gnome-shell
+usuario     1605  0.0  0.5 507496 20160 ?        Sl   12:19   0:00  _ /usr/libexec/gnome-shell-calendar-server
+usuario     1609  0.0  0.6 398788 25544 ?        Ssl  12:19   0:00  _ /usr/libexec/evolution-source-registry
+usuario     1619  0.0  0.6 2606916 26652 ?       Sl   12:19   0:00  _ /usr/bin/gjs /usr/share/gnome-shell/org.gnome.Shell.Notifications
+usuario     1628  0.0  0.1 318100  6972 ?        Ssl  12:19   0:00  _ /usr/libexec/gsd-a11y-settings
+usuario     1631  0.0  0.6 571376 24008 ?        Ssl  12:19   0:00  _ /usr/libexec/gsd-color
+usuario     1632  0.0  0.4 382056 16528 ?        Ssl  12:19   0:00  _ /usr/libexec/gsd-datetime
+usuario     1633  0.0  0.1 320168  7444 ?        Ssl  12:19   0:00  _ /usr/libexec/gsd-housekeeping
+usuario     1634  0.0  0.5 348676 22992 ?        Ssl  12:19   0:00  _ /usr/libexec/gsd-keyboard
+usuario     1635  0.0  0.6 904532 25980 ?        Ssl  12:19   0:00  _ /usr/libexec/gsd-media-keys
+usuario     1636  0.0  0.6 497256 24104 ?        Ssl  12:19   0:00  _ /usr/libexec/gsd-power
+usuario     1637  0.0  0.2 256388 11460 ?        Ssl  12:19   0:00  _ /usr/libexec/gsd-print-notifications
+usuario     1655  0.0  0.1 465392  6292 ?        Ssl  12:19   0:00  _ /usr/libexec/gsd-rfkill
+usuario     1666  0.0  0.1 243800  5980 ?        Ssl  12:19   0:00  _ /usr/libexec/gsd-screensaver-proxy
+usuario     1669  0.0  0.2 473220  9848 ?        Ssl  12:19   0:00  _ /usr/libexec/gsd-sharing
+usuario     1670  0.0  0.2 323468  8704 ?        Ssl  12:19   0:00  _ /usr/libexec/gsd-smartcard
+usuario     1671  0.0  0.2 327792  9352 ?        Ssl  12:19   0:00  _ /usr/libexec/gsd-sound
+usuario     1680  0.0  0.1 393404  7380 ?        Ssl  12:19   0:00  _ /usr/libexec/gsd-usb-protection
+usuario     1687  0.0  0.5 348136 22668 ?        Ssl  12:19   0:00  _ /usr/libexec/gsd-wacom
+usuario     1691  0.0  0.2 322424  8264 ?        Ssl  12:19   0:00  _ /usr/libexec/gsd-wwan
+usuario     1692  0.0  0.6 349500 24352 ?        Ssl  12:19   0:00  _ /usr/libexec/gsd-xsettings
+usuario     1704  0.0  0.7 847196 30172 ?        Ssl  12:19   0:00  _ /usr/libexec/evolution-calendar-factory
+usuario     1737  0.0  0.3 350476 15356 ?        Sl   12:19   0:00  _ /usr/libexec/gsd-printer
+usuario     1779  0.0  0.1 156336  5640 ?        Sl   12:19   0:00  _ /usr/libexec/dconf-service
+usuario     1785  0.0  0.7 771960 30168 ?        Ssl  12:19   0:00  _ /usr/libexec/evolution-addressbook-factory
+usuario     2141  0.0  0.2 395376  9460 ?        Ssl  12:20   0:00  _ /usr/bin/zeitgeist-daemon[0m
+usuario     2147  0.0  0.4 272636 17664 ?        Ssl  12:20   0:00  _ /usr/lib/zeitgeist/zeitgeist-fts
+usuario     2542  0.0  0.1 170552  6652 ?        Ssl  12:20   0:00  _ /usr/libexec/gvfsd-metadata
+usuario     2900  0.1  1.3 858120 52816 ?        Sl   12:22   0:00  _ /usr/bin/gnome-calendar --gapplication-service
+usuario     2901  0.1  1.0 624256 42492 ?        SLl  12:22   0:00  _ /usr/bin/seahorse --gapplication-service
+usuario     3414  0.1  0.5 200276 21936 ?        Sl   12:23   0:00  _ /usr/libexec/gnome-control-center-search-provider
+usuario     3419  2.8  1.2 628348 49180 ?        Rsl  12:23   0:01  _ /usr/libexec/gnome-terminal-server
+usuario     3466  0.0  0.1  17916  3968 pts/0    Ss   12:23   0:00      _ bash
+usuario     3475  0.0  0.3 110992 14024 pts/0    S+   12:23   0:00          _ curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh
+usuario     3476  0.2  0.0   3588  2772 pts/0    S+   12:23   0:00          _ sh
+usuario     6492  0.0  0.0   3588  1188 pts/0    S+   12:24   0:00              _ sh
+usuario     6496  0.0  0.0  19980  3772 pts/0    R+   12:24   0:00              |   _ ps fauxwww
+usuario     6495  0.0  0.0   3588  1188 pts/0    S+   12:24   0:00              _ sh
+usuario     1278  0.0  0.2 248600  7960 ?        Sl   12:19   0:00 /usr/bin/gnome-keyring-daemon[0m --daemonize --login
+  └─(Caps) 0x0000000000004000=cap_ipc_lock
+usuario     1464  0.1  0.1 393180  7832 ?        Ssl  12:19   0:00 /usr/bin/ibus-daemon[0m --daemonize --xim
+usuario     1468  0.0  0.1 244904  7304 ?        Sl   12:19   0:00  _ /usr/libexec/ibus-dconf
+usuario     1469  0.0  1.5 679228 61576 ?        Sl   12:19   0:00  _ /usr/libexec/ibus-ui-gtk3
+usuario     1471  0.3  1.4 678000 57956 ?        Sl   12:19   0:00  _ /usr/libexec/ibus-extension-gtk3
+usuario     1537  0.0  0.1 171072  7072 ?        Sl   12:19   0:00  _ /usr/libexec/ibus-engine-simple
+usuario     1475  0.0  0.5 200620 22684 ?        Sl   12:19   0:00 /usr/libexec/ibus-x11 --kill-daemon[0m
+root        2190  0.2  1.0 146020 42492 ?        SNl  12:20   0:00 /usr/bin/python3 /usr/sbin/aptd
+
+╔══════════╣ Binary processes permissions (non 'root root' and not belonging to current user)
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#processes
+-rwxr-sr-x 1 root ssh   350504 may 29  2020 /usr/bin/ssh-agent
+
+╔══════════╣ Files opened by processes belonging to other users
+╚ This is usually empty because of the lack of privileges to read other user processes information
+COMMAND    PID  TID TASKCMD               USER   FD      TYPE             DEVICE SIZE/OFF       NODE NAME
+
+╔══════════╣ Processes with credentials in memory (root req)
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#credentials-from-process-memory
+gdm-password process found (dump creds from memory as root)
+gnome-keyring-daemon process found (dump creds from memory as root)
+lightdm Not Found
+vsftpd Not Found
+apache2 Not Found
+sshd: process found (dump creds from memory as root)
+
+╔══════════╣ Cron jobs
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#scheduled-cron-jobs
+/usr/bin/crontab
+incrontab Not Found
+-rw-r--r-- 1 root root    1042 feb 13  2020 /etc/crontab
+
+/etc/cron.d:
+total 36
+drwxr-xr-x   2 root root  4096 oct 20 09:45 .
+drwxr-xr-x 141 root root 12288 oct 20 12:19 ..
+-rw-r--r--   1 root root   285 jul 16  2019 anacron
+-rw-r--r--   1 root root    62 jun  8  2020 cga-autologout-v2
+-rw-r--r--   1 root root   201 feb 14  2020 e2scrub_all
+-rw-r--r--   1 root root   102 feb 13  2020 .placeholder
+-rw-r--r--   1 root root   191 oct 20 09:44 popularity-contest
+
+/etc/cron.daily:
+total 56
+drwxr-xr-x   2 root root  4096 oct 20 09:48 .
+drwxr-xr-x 141 root root 12288 oct 20 12:19 ..
+-rwxr-xr-x   1 root root   311 jul 16  2019 0anacron
+-rwxr-xr-x   1 root root  1478 abr  9  2020 apt-compat
+-rwxr-xr-x   1 root root   355 dic 29  2017 bsdmainutils
+-rwxr-xr-x   1 root root  1187 sep  5  2019 dpkg
+-rwxr-xr-x   1 root root   377 ene 21  2019 logrotate
+-rwxr-xr-x   1 root root  1123 feb 25  2020 man-db
+-rw-r--r--   1 root root   102 feb 13  2020 .placeholder
+-rwxr-xr-x   1 root root  4574 jul 18  2019 popularity-contest
+-rwxr-xr-x   1 root root   214 abr  2  2020 update-notifier-common
+
+/etc/cron.hourly:
+total 20
+drwxr-xr-x   2 root root  4096 oct 20 09:37 .
+drwxr-xr-x 141 root root 12288 oct 20 12:19 ..
+-rw-r--r--   1 root root   102 feb 13  2020 .placeholder
+
+/etc/cron.monthly:
+total 24
+drwxr-xr-x   2 root root  4096 oct 20 09:44 .
+drwxr-xr-x 141 root root 12288 oct 20 12:19 ..
+-rwxr-xr-x   1 root root   313 jul 16  2019 0anacron
+-rw-r--r--   1 root root   102 feb 13  2020 .placeholder
+
+/etc/cron.weekly:
+total 32
+drwxr-xr-x   2 root root  4096 oct 20 09:48 .
+drwxr-xr-x 141 root root 12288 oct 20 12:19 ..
+-rwxr-xr-x   1 root root   312 jul 16  2019 0anacron
+-rwxr-xr-x   1 root root   813 feb 25  2020 man-db
+-rw-r--r--   1 root root   102 feb 13  2020 .placeholder
+-rwxr-xr-x   1 root root   211 abr  2  2020 update-notifier-common
+
+/var/spool/anacron:
+total 20
+drwxr-xr-x 2 root root 4096 oct 20 09:55 .
+drwxr-xr-x 8 root root 4096 oct 20 09:43 ..
+-rw------- 1 root root    9 oct 20 10:01 cron.daily
+-rw------- 1 root root    9 oct 20 10:11 cron.monthly
+-rw------- 1 root root    9 oct 20 10:06 cron.weekly
+
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+17 *	* * *	root    cd / && run-parts --report /etc/cron.hourly
+25 6	* * *	root	test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.daily )
+47 6	* * 7	root	test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.weekly )
+52 6	1 * *	root	test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.monthly )
+
+
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+HOME=/root
+LOGNAME=root
+
+1	5	cron.daily	run-parts --report /etc/cron.daily
+7	10	cron.weekly	run-parts --report /etc/cron.weekly
+@monthly	15	cron.monthly	run-parts --report /etc/cron.monthly
+
+╔══════════╣ Systemd PATH
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#systemd-path-relative-paths
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+╔══════════╣ Analyzing .service files
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#services
+You can't write on systemd PATH
+
+╔══════════╣ System timers
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#timers
+NEXT                         LEFT          LAST                         PASSED       UNIT                         ACTIVATES                     
+Thu 2022-10-20 12:34:25 CEST 9min left     Thu 2022-10-20 11:32:29 CEST 51min ago    anacron.timer                anacron.service               
+Thu 2022-10-20 12:34:29 CEST 10min left    n/a                          n/a          systemd-tmpfiles-clean.timer systemd-tmpfiles-clean.service
+Thu 2022-10-20 13:49:16 CEST 1h 24min left Thu 2022-10-20 12:11:03 CEST 13min ago    motd-news.timer              motd-news.service             
+Thu 2022-10-20 20:59:25 CEST 8h left       Thu 2022-10-20 09:55:36 CEST 2h 28min ago apt-daily.timer              apt-daily.service             
+Fri 2022-10-21 00:00:00 CEST 11h left      Thu 2022-10-20 09:55:36 CEST 2h 28min ago logrotate.timer              logrotate.service             
+Fri 2022-10-21 00:00:00 CEST 11h left      Thu 2022-10-20 09:55:36 CEST 2h 28min ago man-db.timer                 man-db.service                
+Fri 2022-10-21 06:11:18 CEST 17h left      Thu 2022-10-20 09:55:36 CEST 2h 28min ago apt-daily-upgrade.timer      apt-daily-upgrade.service     
+Sun 2022-10-23 03:10:15 CEST 2 days left   Thu 2022-10-20 09:55:36 CEST 2h 28min ago e2scrub_all.timer            e2scrub_all.service           
+Mon 2022-10-24 00:00:00 CEST 3 days left   Thu 2022-10-20 09:55:36 CEST 2h 28min ago fstrim.timer                 fstrim.service                
+
+╔══════════╣ Analyzing .timer files
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#timers
+
+╔══════════╣ Analyzing .socket files
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#sockets
+/etc/systemd/system/sockets.target.wants/avahi-daemon.socket is calling this writable listener: /run/avahi-daemon/socket
+/usr/lib/systemd/system/avahi-daemon.socket is calling this writable listener: /run/avahi-daemon/socket
+/usr/lib/systemd/system/dbus.socket is calling this writable listener: /var/run/dbus/system_bus_socket
+/usr/lib/systemd/system/sockets.target.wants/dbus.socket is calling this writable listener: /var/run/dbus/system_bus_socket
+/usr/lib/systemd/system/sockets.target.wants/systemd-journald-dev-log.socket is calling this writable listener: /run/systemd/journal/dev-log
+/usr/lib/systemd/system/sockets.target.wants/systemd-journald.socket is calling this writable listener: /run/systemd/journal/stdout
+/usr/lib/systemd/system/sockets.target.wants/systemd-journald.socket is calling this writable listener: /run/systemd/journal/socket
+/usr/lib/systemd/system/syslog.socket is calling this writable listener: /run/systemd/journal/syslog
+/usr/lib/systemd/system/systemd-journald-dev-log.socket is calling this writable listener: /run/systemd/journal/dev-log
+/usr/lib/systemd/system/systemd-journald.socket is calling this writable listener: /run/systemd/journal/stdout
+/usr/lib/systemd/system/systemd-journald.socket is calling this writable listener: /run/systemd/journal/socket
+/usr/lib/systemd/system/systemd-rfkill.socket is calling this writable listener: /dev/rfkill
+
+╔══════════╣ Unix Sockets Listening
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#sockets
+/dbus-vfs-daemon/socket-Yg6ENfUW
+/home/usuario/.cache/ibus/dbus-sT9RSJNk
+/run/acpid.socket
+  └─(Read Write)
+/run/avahi-daemon/socket
+  └─(Read Write)
+/run/cups/cups.sock
+  └─(Read Write)
+/run/dbus/system_bus_socket
+  └─(Read Write)
+/run/pcscd/pcscd.comm
+  └─(Read Write)
+/run/systemd/fsck.progress
+/run/systemd/journal/dev-log
+  └─(Read Write)
+/run/systemd/journal/io.systemd.journal
+/run/systemd/journal/socket
+  └─(Read Write)
+/run/systemd/journal/stdout
+  └─(Read Write)
+/run/systemd/journal/syslog
+  └─(Read Write)
+/run/systemd/notify
+  └─(Read Write)
+/run/systemd/private
+  └─(Read Write)
+/run/systemd/userdb/io.systemd.DynamicUser
+  └─(Read Write)
+/run/udev/control
+/run/user/1000/bus
+  └─(Read Write)
+/run/user/1000/gnupg/S.dirmngr
+  └─(Read Write)
+/run/user/1000/gnupg/S.gpg-agent
+  └─(Read Write)
+/run/user/1000/gnupg/S.gpg-agent.browser
+  └─(Read Write)
+/run/user/1000/gnupg/S.gpg-agent.extra
+  └─(Read Write)
+/run/user/1000/gnupg/S.gpg-agent.ssh
+  └─(Read Write)
+/run/user/1000/keyring/control
+  └─(Read Write)
+/run/user/1000/keyring/pkcs11
+  └─(Read Write)
+/run/user/1000/keyring/ssh
+  └─(Read Write)
+/run/user/1000/pk-debconf-socket
+  └─(Read Write)
+/run/user/1000/pulse/native
+  └─(Read Write)
+/run/user/1000/systemd/notify
+  └─(Read Write)
+/run/user/1000/systemd/private
+  └─(Read Write)
+/tmp/dbus-1ufhqBhE
+/tmp/dbus-B7et4xxnkp
+/tmp/dbus-Ktf9n1Yr
+/tmp/dbus-Q6aPws2G
+/tmp/dbus-TaN7s84c
+/tmp/.ICE-unix/1559
+  └─(Read Write)
+/tmp/OSL_PIPE_1000_SingleOfficeIPC_b5d6e8492f2c1b66cf5b1c1380bb59c8
+  └─(Read Write)
+/tmp/ssh-XgRE22pWeScC/agent.1372
+  └─(Read Write)
+/tmp/.X11-unix/X0
+  └─(Read Write)
+/tmp/.X11-unix/X1024
+  └─(Read )
+/tmp/.X11-unix/X1025
+  └─(Read )
+
+╔══════════╣ D-Bus config files
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#d-bus
+
+╔══════════╣ D-Bus Service Objects list
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#d-bus
+NAME                                  PID PROCESS         USER             CONNECTION    UNIT                             SESSION DESCRIPTION
+:1.0                                  380 systemd-timesyn systemd-timesync :1.0          systemd-timesyncd.service        -       -
+:1.1                                  379 systemd-resolve systemd-resolve  :1.1          systemd-resolved.service         -       -
+:1.10                                 541 polkitd         root             :1.10         polkit.service                   -       -
+:1.100                               1315 Xorg            usuario          :1.100        session-2.scope                  2       -
+:1.106                               1322 goa-daemon[0m      usuario          :1.106        user@1000.service                -       -
+:1.112                               1272 tracker-miner-f usuario          :1.112        user@1000.service                -       -
+:1.113                               1313 gdm-x-session   usuario          :1.113        session-2.scope                  2       -
+:1.114                               1468 ibus-dconf      usuario          :1.114        session-2.scope                  2       -
+:1.115                               1519 xdg-desktop-por usuario          :1.115        user@1000.service                -       -
+:1.116                               1559 gnome-session-b usuario          :1.116        user@1000.service                -       -
+:1.117                               1577 gnome-shell     usuario          :1.117        user@1000.service                -       -
+:1.118                               1635 gsd-media-keys  usuario          :1.118        user@1000.service                -       -
+:1.12                                 539 cups-browsed    root             :1.12         cups-browsed.service             -       -
+:1.121                               1655 gsd-rfkill      usuario          :1.121        user@1000.service                -       -
+:1.122                               1637 gsd-print-notif usuario          :1.122        user@1000.service                -       -
+:1.123                               1636 gsd-power       usuario          :1.123        user@1000.service                -       -
+:1.124                               1708 gsd-disk-utilit usuario          :1.124        user@1000.service                -       -
+:1.125                               1634 gsd-keyboard    usuario          :1.125        user@1000.service                -       -
+:1.126                               1669 gsd-sharing     usuario          :1.126        user@1000.service                -       -
+:1.127                               1691 gsd-wwan        usuario          :1.127        user@1000.service                -       -
+:1.128                               1680 gsd-usb-protect usuario          :1.128        user@1000.service                -       -
+:1.129                               1631 gsd-color       usuario          :1.129        user@1000.service                -       -
+:1.13                                 539 cups-browsed    root             :1.13         cups-browsed.service             -       -
+:1.130                               1704 evolution-calen usuario          :1.130        user@1000.service                -       -
+:1.131                               1785 evolution-addre usuario          :1.131        user@1000.service                -       -
+:1.132                               1737 gsd-printer     usuario          :1.132        user@1000.service                -       -
+:1.133                               1659 python2         usuario          :1.133        user@1000.service                -       -
+:1.136                               2141 zeitgeist-daemo usuario          :1.136        user@1000.service                -       -
+:1.137                               2169 upgrade_system. usuario          :1.137        user@1000.service                -       -
+:1.138                               2190 aptd            root             :1.138        dbus.service                     -       -
+:1.14                                 490 systemd-logind  root             :1.14         systemd-logind.service           -       -
+:1.141                               2555 gnome-software  usuario          :1.141        user@1000.service                -       -
+:1.143                               2900 gnome-calendar  usuario          :1.143        user@1000.service                -       -
+:1.145                               2901 seahorse        usuario          :1.145        user@1000.service                -       -
+:1.157                              10993 busctl          usuario          :1.157        user@1000.service                -       -
+:1.17                                 867 kerneloops      kernoops         :1.17         kerneloops.service               -       -
+:1.18                                 876 kerneloops      kernoops         :1.18         kerneloops.service               -       -
+:1.19                                 872 whoopsie        whoopsie         :1.19         whoopsie.service                 -       -
+:1.2                                  435 avahi-daemon    avahi            :1.2          avahi-daemon.service             -       -
+:1.20                                 886 gdm3            root             :1.20         gdm.service                      -       -
+:1.21                                 872 whoopsie        whoopsie         :1.21         whoopsie.service                 -       -
+:1.3                                  442 cupsd           root             :1.3          cups.service                     -       -
+:1.4                                  430 accounts-daemon[0m root             :1.4          accounts-daemon.service          -       -
+:1.49                                 870 ticboxcloud-use root             :1.49         ticboxcloud-configurator.service -       -
+:1.5                                  463 dbus            lp               :1.5          cups.service                     -       -
+:1.56                                1012 upowerd         root             :1.56         upower.service                   -       -
+:1.58                                1068 packagekitd     root             :1.58         packagekit.service               -       -
+:1.6                                  450 NetworkManager  root             :1.6          NetworkManager.service           -       -
+:1.7                                  498 wpa_supplicant  root             :1.7          wpa_supplicant.service           -       -
+:1.72                                1203 colord          colord           :1.72         colord.service                   -       -
+:1.77                                1239 gdm-session-wor root             :1.77         session-2.scope                  2       -
+:1.8                                  491 udisksd         root             :1.8          udisks2.service                  -       -
+:1.80                                1250 systemd         usuario          :1.80         user@1000.service                -       -
+:1.81                                1278 gnome-keyring-d usuario          :1.81         session-2.scope                  2       -
+:1.9                                    1 systemd         root             :1.9          init.scope                       -       -
+:1.93                                1270 pulseaudio      usuario          :1.93         user@1000.service                -       -
+:1.94                                1301 gvfs-udisks2-vo usuario          :1.94         user@1000.service                -       -
+com.hp.hplip                            - -               -                (activatable) -                                -       -
+com.redhat.NewPrinterNotification    1737 gsd-printer     usuario          :1.132        user@1000.service                -       -
+com.redhat.PrinterDriversInstaller   1737 gsd-printer     usuario          :1.132        user@1000.service                -       -
+com.ubuntu.LanguageSelector             - -               -                (activatable) -                                -       -
+com.ubuntu.SoftwareProperties           - -               -                (activatable) -                                -       -
+com.ubuntu.USBCreator                   - -               -                (activatable) -                                -       -
+com.ubuntu.WhoopsiePreferences          - -               -                (activatable) -                                -       -
+fi.w1.wpa_supplicant1                 498 wpa_supplicant  root             :1.7          wpa_supplicant.service           -       -
+io.netplan.Netplan                      - -               -                (activatable) -                                -       -
+org.bluez                               - -               -                (activatable) -                                -       -
+org.debian.apt                       2190 aptd            root             :1.138        dbus.service                     -       -
+org.educaandos.ticboxcloud.ldapauth   870 ticboxcloud-use root             :1.49         ticboxcloud-configurator.service -       -
+ -- UID=0 EUID=0 
+org.freedesktop.Accounts              430 accounts-daemon[0m root             :1.4          accounts-daemon.service          -       -
+org.freedesktop.Avahi                 435 avahi-daemon    avahi            :1.2          avahi-daemon.service             -       -
+org.freedesktop.ColorManager         1203 colord          colord           :1.72         colord.service                   -       -
+org.freedesktop.DBus                    1 systemd         root             -             init.scope                       -       -
+org.freedesktop.GeoClue2                - -               -                (activatable) -                                -       -
+org.freedesktop.NetworkManager        450 NetworkManager  root             :1.6          NetworkManager.service           -       -
+org.freedesktop.PackageKit           1068 packagekitd     root             :1.58         packagekit.service               -       -
+org.freedesktop.PolicyKit1            541 polkitd         root             :1.10         polkit.service                   -       -
+org.freedesktop.UDisks2               491 udisksd         root             :1.8          udisks2.service                  -       -
+org.freedesktop.UPower               1012 upowerd         root             :1.56         upower.service                   -       -
+org.freedesktop.hostname1               - -               -                (activatable) -                                -       -
+org.freedesktop.locale1                 - -               -                (activatable) -                                -       -
+org.freedesktop.login1                490 systemd-logind  root             :1.14         systemd-logind.service           -       -
+org.freedesktop.network1                - -               -                (activatable) -                                -       -
+org.freedesktop.nm_dispatcher           - -               -                (activatable) -                                -       -
+org.freedesktop.resolve1              379 systemd-resolve systemd-resolve  :1.1          systemd-resolved.service         -       -
+org.freedesktop.systemd1                1 systemd         root             :1.9          init.scope                       -       -
+org.freedesktop.timedate1               - -               -                (activatable) -                                -       -
+org.freedesktop.timesync1             380 systemd-timesyn systemd-timesync :1.0          systemd-timesyncd.service        -       -
+org.gnome.DisplayManager              886 gdm3            root             :1.20         gdm.service                      -       -
+ -- UID=0 EUID=0 
+org.kde.ktexteditor.katetextbuffer      - -               -                (activatable) -                                -       -
+org.opensuse.CupsPkHelper.Mechanism     - -               -                (activatable) -                                -       -
+
+
+                              ╔═════════════════════╗
+══════════════════════════════╣ Network Information ╠══════════════════════════════
+                              ╚═════════════════════╝
+╔══════════╣ Hostname, hosts and DNS
+educaandos
+127.0.0.1	localhost
+::1		localhost ip6-localhost ip6-loopback
+ff02::1		ip6-allnodes
+ff02::2		ip6-allrouters
+
+
+nameserver 127.0.0.53
+options edns0 trust-ad
+search 14004841.14.andared.ced.junta-andalucia.es
+
+╔══════════╣ Interfaces
+# symbolic names for networks, see networks(5) for more information
+link-local 169.254.0.0
+enp0s3: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 10.0.2.15  netmask 255.255.255.0  broadcast 10.0.2.255
+        inet6 fe80::fa3f:109a:cbd0:695d  prefixlen 64  scopeid 0x20<link>
+        ether 08:00:27:e4:82:14  txqueuelen 1000  (Ethernet)
+        RX packets 1390  bytes 1782323 (1.7 MB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 549  bytes 46892 (46.8 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1000  (Bucle local)
+        RX packets 252  bytes 22732 (22.7 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 252  bytes 22732 (22.7 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+
+╔══════════╣ Active Ports
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#open-ports
+
+╔══════════╣ Can I sniff with tcpdump?
+No
+
+
+
+                               ╔═══════════════════╗
+═══════════════════════════════╣ Users Information ╠═══════════════════════════════
+                               ╚═══════════════════╝
+╔══════════╣ My user
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#users
+uid=1000(usuario) gid=1000(usuario) grupos=1000(usuario),4(adm),24(cdrom),30(dip),46(plugdev),114(lpadmin),125(sambashare)
+
+╔══════════╣ Do I have PGP keys?
+/usr/bin/gpg
+netpgpkeys Not Found
+netpgp Not Found
+
+╔══════════╣ Checking 'sudo -l', /etc/sudoers, and /etc/sudoers.d
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#sudo-and-suid
+Coincidiendo entradas por defecto para usuario en educaandos:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+El usuario usuario puede ejecutar los siguientes comandos en educaandos:
+    (root) NOPASSWD: /usr/bin/cga-congelador.sh
+    (root) NOPASSWD: /usr/share/cga-herramienta-informacion/cga-herramienta-informacion-hardware.sh
+    (root) NOPASSWD: /usr/sbin/cga-pynewuser
+    (root) NOPASSWD: /usr/share/cga-update-manager/cga-fix.sh
+    (root) NOPASSWD: /usr/share/cga-usb-creator/desmontar_usb.sh
+    (root) NOPASSWD: /usr/share/cga-usb-creator/montar_imagen.sh
+    (root) NOPASSWD: /usr/share/cga-usb-creator/delete_partition.sh
+    (root) NOPASSWD: /usr/share/cga-usb-creator/sync.sh
+    (root) NOPASSWD: /usr/share/cga-usb-creator/pv.sh
+    (root) NOPASSWD: /usr/share/cga-usb-creator/finished_imagen.sh
+    (root) NOPASSWD: /usr/share/cga-usb-creator/desmontar_usb_hybrid.sh
+    (root) NOPASSWD: /usr/share/cga-usb-creator/montar_imagen_hybrid.sh
+    (root) NOPASSWD: /usr/share/cga-usb-creator/delete_partition_hybrid.sh
+    (root) NOPASSWD: /usr/share/cga-usb-creator/sync_hybrid.sh
+    (root) NOPASSWD: /usr/share/cga-usb-creator/pv_hybrid.sh
+    (root) NOPASSWD: /usr/share/cga-usb-creator/finished_imagen_hybrid.sh
+    (root) NOPASSWD: /usr/share/cga-usb-creator/tipo_imagen.sh
+    (root) NOPASSWD: /usr/share/educaandos-desktop-configurator/setautologin
+    (root) NOPASSWD: /usr/sbin/ticboxcloud-pyconfigurator
+    (root) NOPASSWD: /usr/bin/Scr_Cliente.py
+
+╔══════════╣ Checking sudo tokens
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#reusing-sudo-tokens
+ptrace protection is enabled (1)
+gdb wasn't found in PATH, this might still be vulnerable but linpeas won't be able to check it
+
+╔══════════╣ Checking Pkexec policy
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation/interesting-groups-linux-pe#pe-method-2
+
+[Configuration]
+AdminIdentities=unix-user:0
+[Configuration]
+AdminIdentities=unix-group:sudo;unix-group:admin
+
+╔══════════╣ Superusers
+root:x:0:0:root:/root:/bin/bash
+
+╔══════════╣ Users with console
+root:x:0:0:root:/root:/bin/bash
+usuario:x:1000:1000:usuario,,,:/home/usuario:/bin/bash
+
+╔══════════╣ All users & groups
+uid=0(root) gid=0(root) grupos=0(root)
+uid=1000(usuario) gid=1000(usuario) grupos=1000(usuario),4(adm),24(cdrom),30(dip),46(plugdev),114(lpadmin),125(sambashare)
+uid=100(systemd-network) gid=102(systemd-network) grupos=102(systemd-network)
+uid=101(systemd-resolve) gid=103(systemd-resolve) grupos=103(systemd-resolve)
+uid=102(systemd-timesync) gid=104(systemd-timesync) grupos=104(systemd-timesync)
+uid=103(syslog) gid=109(syslog) grupos=109(syslog),4(adm)
+uid=104(_apt) gid=65534(nogroup) grupos=65534(nogroup)
+uid=105(messagebus) gid=111(messagebus) grupos=111(messagebus)
+uid=106(geoclue) gid=112(geoclue) grupos=112(geoclue)
+uid=107(gdm) gid=113(gdm) grupos=113(gdm)
+uid=108(cups-pk-helper) gid=114(lpadmin) grupos=114(lpadmin)
+uid=109(speech-dispatcher) gid=29(audio) grupos=29(audio)
+uid=10(uucp) gid=10(uucp) grupos=10(uucp)
+uid=110(avahi-autoipd) gid=118(avahi-autoipd) grupos=118(avahi-autoipd)
+uid=111(kernoops) gid=65534(nogroup) grupos=65534(nogroup)
+uid=112(sshd) gid=65534(nogroup) grupos=65534(nogroup)
+uid=113(whoopsie) gid=119(whoopsie) grupos=119(whoopsie)
+uid=114(pulse) gid=121(pulse) grupos=121(pulse),29(audio)
+uid=115(avahi) gid=123(avahi) grupos=123(avahi)
+uid=116(hplip) gid=7(lp) grupos=7(lp)
+uid=117(colord) gid=124(colord) grupos=124(colord)
+uid=13(proxy) gid=13(proxy) grupos=13(proxy)
+uid=1(daemon[0m) gid=1(daemon[0m) grupos=1(daemon[0m)
+uid=2(bin) gid=2(bin) grupos=2(bin)
+uid=33(www-data) gid=33(www-data) grupos=33(www-data)
+uid=34(backup) gid=34(backup) grupos=34(backup)
+uid=38(list) gid=38(list) grupos=38(list)
+uid=39(irc) gid=39(irc) grupos=39(irc)
+uid=3(sys) gid=3(sys) grupos=3(sys)
+uid=41(gnats) gid=41(gnats) grupos=41(gnats)
+uid=4(sync) gid=65534(nogroup) grupos=65534(nogroup)
+uid=5(games) gid=60(games) grupos=60(games)
+uid=65534(nobody) gid=65534(nogroup) grupos=65534(nogroup)
+uid=6(man) gid=12(man) grupos=12(man)
+uid=7(lp) gid=7(lp) grupos=7(lp)
+uid=8(mail) gid=8(mail) grupos=8(mail)
+uid=999(systemd-coredump) gid=999(systemd-coredump) grupos=999(systemd-coredump)
+uid=9(news) gid=9(news) grupos=9(news)
+
+╔══════════╣ Login now
+ 12:24:31 up 5 min,  1 user,  load average: 1,46, 0,66, 0,29
+USUARIO  TTY      DE               LOGIN@   IDLE   JCPU   PCPU WHAT
+usuario  :0       :0               12:19   ?xdm?   1:13   0.00s /usr/lib/gdm3/gdm-x-session --run-script env GNOME_SHELL_SESSION_MODE=ubuntu /usr/bin/gnome-session --systemd --session=ubuntu
+
+╔══════════╣ Last logons
+usuario  :0           Thu Oct 20 10:34:46 2022 - down                      (01:39)     0.0.0.0
+reboot   system boot  Thu Oct 20 10:34:27 2022 - Thu Oct 20 12:13:46 2022  (01:39)     0.0.0.0
+usuario  :0           Thu Oct 20 10:24:59 2022 - crash                     (00:09)     0.0.0.0
+reboot   system boot  Thu Oct 20 10:24:40 2022 - Thu Oct 20 12:13:46 2022  (01:49)     0.0.0.0
+usuario  :0           Thu Oct 20 10:00:03 2022 - down                      (00:24)     0.0.0.0
+reboot   system boot  Thu Oct 20 09:56:50 2022 - Thu Oct 20 10:24:34 2022  (00:27)     0.0.0.0
+usuario  :0           Thu Oct 20 09:55:57 2022 - down                      (00:00)     0.0.0.0
+reboot   system boot  Thu Oct 20 09:55:35 2022 - Thu Oct 20 09:56:24 2022  (00:00)     0.0.0.0
+
+wtmp empieza Thu Oct 20 09:55:35 2022
+
+╔══════════╣ Last time logon each user
+Nombre           Puerto   De               Último
+root                                       **Nunca ha accedido**
+daemon[0m                                     **Nunca ha accedido**
+bin                                        **Nunca ha accedido**
+sys                                        **Nunca ha accedido**
+sync                                       **Nunca ha accedido**
+games                                      **Nunca ha accedido**
+man                                        **Nunca ha accedido**
+lp                                         **Nunca ha accedido**
+mail                                       **Nunca ha accedido**
+news                                       **Nunca ha accedido**
+uucp                                       **Nunca ha accedido**
+proxy                                      **Nunca ha accedido**
+www-data                                   **Nunca ha accedido**
+backup                                     **Nunca ha accedido**
+list                                       **Nunca ha accedido**
+irc                                        **Nunca ha accedido**
+gnats                                      **Nunca ha accedido**
+nobody                                     **Nunca ha accedido**
+systemd-network                            **Nunca ha accedido**
+systemd-resolve                            **Nunca ha accedido**
+systemd-timesync                           **Nunca ha accedido**
+syslog                                     **Nunca ha accedido**
+_apt                                       **Nunca ha accedido**
+messagebus                                 **Nunca ha accedido**
+geoclue                                    **Nunca ha accedido**
+gdm                                        **Nunca ha accedido**
+cups-pk-helper                             **Nunca ha accedido**
+speech-dispatcher                           **Nunca ha accedido**
+avahi-autoipd                              **Nunca ha accedido**
+kernoops                                   **Nunca ha accedido**
+sshd                                       **Nunca ha accedido**
+whoopsie                                   **Nunca ha accedido**
+pulse                                      **Nunca ha accedido**
+avahi                                      **Nunca ha accedido**
+hplip                                      **Nunca ha accedido**
+colord                                     **Nunca ha accedido**
+usuario                                    **Nunca ha accedido**
+systemd-coredump                           **Nunca ha accedido**
+
+╔══════════╣ Do not forget to test 'su' as any other user with shell: without password and with their names as password (I can't do it...)
+
+╔══════════╣ Do not forget to execute 'sudo -l' without password or with valid password (if you know it)!!
+
+
+
+                             ╔══════════════════════╗
+═════════════════════════════╣ Software Information ╠═════════════════════════════
+                             ╚══════════════════════╝
+╔══════════╣ Useful software
+/usr/bin/base64
+/usr/bin/curl
+/usr/bin/g++
+/usr/bin/gcc
+/usr/bin/make
+/usr/bin/nc
+/usr/bin/netcat
+/usr/bin/perl
+/usr/bin/ping
+/usr/bin/python
+/usr/bin/python2
+/usr/bin/python2.7
+/usr/bin/python3
+/usr/bin/sudo
+/usr/bin/wget
+/usr/bin/xterm
+
+╔══════════╣ Installed Compilers
+ii  antlr                                         2.7.7+dfsg-10build1                         all          language tool for constructing recognizers, compilers etc
+ii  g++                                           4:9.3.0-1ubuntu2                            amd64        GNU C++ compiler
+ii  g++-9                                         9.3.0-10ubuntu2                             amd64        GNU C++ compiler
+ii  gcc                                           4:9.3.0-1ubuntu2                            amd64        GNU C compiler
+ii  gcc-9                                         9.3.0-10ubuntu2                             amd64        GNU C compiler
+/usr/bin/gcc
+
+╔══════════╣ Searching mysql credentials and exec
+Found readable /etc/mysql/my.cnf
+!includedir /etc/mysql/conf.d/
+
+╔══════════╣ Analyzing Rsync Files (limit 70)
+-rw-r--r-- 1 root root 1044 oct 15  2019 /usr/share/doc/rsync/examples/rsyncd.conf
+[ftp]
+	comment = public archive
+	path = /var/www/pub
+	use chroot = yes
+	lock file = /var/lock/rsyncd
+	read only = yes
+	list = yes
+	uid = nobody
+	gid = nogroup
+	strict modes = yes
+	ignore errors = no
+	ignore nonreadable = yes
+	transfer logging = no
+	timeout = 600
+	refuse options = checksum dry-run
+	dont compress = *.gz *.tgz *.zip *.z *.rpm *.deb *.iso *.bz2 *.tbz
+
+
+╔══════════╣ Analyzing Wifi Connections Files (limit 70)
+drwxr-xr-x 2 root root 4096 oct 20 09:55 /etc/NetworkManager/system-connections
+drwxr-xr-x 2 root root 4096 oct 20 09:55 /etc/NetworkManager/system-connections
+-rw------- 1 root root 493 oct 20 12:19 /etc/NetworkManager/system-connections/Andared
+
+
+╔══════════╣ Analyzing Ldap Files (limit 70)
+The password hash is from the {SSHA} to 'structural'
+drwxr-xr-x 2 root root 4096 oct 20 09:40 /etc/ldap
+
+drwxr-xr-x 6 root root 4096 oct 20 09:45 /usr/lib/python3/dist-packages/ldap
+
+
+╔══════════╣ Searching ssl/ssh files
+PermitRootLogin without-password
+PasswordAuthentication no
+ChallengeResponseAuthentication no
+UsePAM yes
+
+══╣ Possible private SSH keys were found!
+/etc/ImageMagick-6/mime.xml
+
+══╣ Some SSH Agent files were found:
+/tmp/ssh-XgRE22pWeScC/agent.1372
+
+══╣ Writable ssh and gpg agents
+/tmp/ssh-XgRE22pWeScC/agent.1372
+/etc/systemd/user/sockets.target.wants/gpg-agent-browser.socket
+/etc/systemd/user/sockets.target.wants/gpg-agent-extra.socket
+/etc/systemd/user/sockets.target.wants/gpg-agent.socket
+/etc/systemd/user/sockets.target.wants/gpg-agent-ssh.socket
+══╣ Some home ssh config file was found
+/usr/share/openssh/sshd_config
+Include /etc/ssh/sshd_config.d/*.conf
+ChallengeResponseAuthentication no
+UsePAM yes
+X11Forwarding yes
+PrintMotd no
+AcceptEnv LANG LC_*
+Subsystem	sftp	/usr/lib/openssh/sftp-server
+
+══╣ /etc/hosts.allow file found, trying to read the rules:
+/etc/hosts.allow
+
+
+Searching inside /etc/ssh/ssh_config for interesting info
+Include /etc/ssh/ssh_config.d/*.conf
+Host *
+    SendEnv LANG LC_*
+    HashKnownHosts yes
+    GSSAPIAuthentication yes
+
+╔══════════╣ Analyzing PAM Auth Files (limit 70)
+drwxr-xr-x 2 root root 4096 oct 20 10:26 /etc/pam.d
+-rw-r--r-- 1 root root 2133 may 29  2020 /etc/pam.d/sshd
+
+
+
+
+╔══════════╣ Analyzing Keyring Files (limit 70)
+drwx------ 2 usuario usuario 4096 oct 20 12:19 /home/usuario/.local/share/keyrings
+drwxr-xr-x 2 root root 4096 oct 20 09:37 /usr/share/keyrings
+drwx------ 2 gdm gdm 4096 oct 20 09:55 /var/lib/gdm3/.local/share/keyrings
+
+-rw------- 1 usuario usuario 117 oct 20 09:55 /home/usuario/.local/share/keyrings/login.keyring
+
+-rw------- 1 usuario usuario 207 oct 20 09:55 /home/usuario/.local/share/keyrings/user.keystore
+
+
+╔══════════╣ Analyzing Filezilla Files (limit 70)
+-rwxr-xr-x 1 root root 6192376 feb  8  2020 /usr/bin/filezilla
+
+lrwxrwxrwx 1 root root 16 feb  8  2020 /usr/share/doc/filezilla -> filezilla-common
+
+drwxr-xr-x 3 root root 4096 oct 20 09:41 /usr/share/filezilla
+
+
+
+
+╔══════════╣ Searching uncommon passwd files (splunk)
+passwd file: /etc/pam.d/passwd
+passwd file: /etc/passwd
+passwd file: /usr/share/lintian/overrides/passwd
+
+╔══════════╣ Analyzing Github Files (limit 70)
+
+
+
+drw-r-xr-x 8 root root 4096 oct 20 09:43 /usr/src/rtlwifi-new-0.6/.git
+
+╔══════════╣ Analyzing PGP-GPG Files (limit 70)
+/usr/bin/gpg
+netpgpkeys Not Found
+netpgp Not Found
+
+-rw-r--r-- 1 root root 2286 sep 21  2020 /etc/apt/trusted.gpg.d/educaandos-sar-keyring.gpg
+-rw-r--r-- 1 root root 2796 abr  9  2020 /etc/apt/trusted.gpg.d/ubuntu-keyring-2012-archive.gpg
+-rw-r--r-- 1 root root 2794 abr  9  2020 /etc/apt/trusted.gpg.d/ubuntu-keyring-2012-cdimage.gpg
+-rw-r--r-- 1 root root 1733 abr  9  2020 /etc/apt/trusted.gpg.d/ubuntu-keyring-2018-archive.gpg
+-rw------- 1 usuario usuario 1200 oct 20 10:02 /home/usuario/.gnupg/trustdb.gpg
+-rw-r--r-- 1 root root 3267 mar 10  2020 /usr/share/gnupg/distsigkey.gpg
+-rw-r--r-- 1 root root 2236 mar 30  2020 /usr/share/keyrings/ubuntu-advantage-esm-apps.gpg
+-rw-r--r-- 1 root root 2264 mar 30  2020 /usr/share/keyrings/ubuntu-advantage-esm-infra-trusty.gpg
+-rw-r--r-- 1 root root 7399 sep 18  2018 /usr/share/keyrings/ubuntu-archive-keyring.gpg
+-rw-r--r-- 1 root root 6713 oct 27  2016 /usr/share/keyrings/ubuntu-archive-removed-keys.gpg
+-rw-r--r-- 1 root root 4097 feb  6  2018 /usr/share/keyrings/ubuntu-cloudimage-keyring.gpg
+-rw-r--r-- 1 root root 0 ene 17  2018 /usr/share/keyrings/ubuntu-cloudimage-removed-keys.gpg
+-rw-r--r-- 1 root root 1227 may 27  2010 /usr/share/keyrings/ubuntu-master-keyring.gpg
+-rw-r--r-- 1 root root 2867 feb 14  2020 /usr/share/popularity-contest/debian-popcon.gpg
+-rw-r--r-- 1 root root 833 oct 20 09:36 /var/lib/apt/lists/_cdrom_dists_educaandos_Release.gpg
+-----BEGIN PGP SIGNATURE-----
+iQIzBAEBCgAdFiEEPKSffC0y8FjuE9nP26HsYzTIbWUFAmHDU1cACgkQ26HsYzTI
+bWV4vhAA2vUiMIqmS/HgjrBQsa46xjee40tNm08KZcFKM/VqulfdIaNRtO6UHCPn
+Mij1JKtnj1ov1LbWsdlcmtvbLzHhN3UTiXr3vJDATmym1WaBYEchiUeHTEzleizc
+GyDUKrPWHgICFdEsE831ejli1QHCozU32dB0ARqMVCqF4+JpYYtZDkHE285SPG8f
+KWoCaQrIwtkNC803wn4CIl43IrM0nGM0Jc4yIt1ZOID5satB+Nyc0Yl5uPE+Fuur
+h1SL87m1o48Rj4MTofrXWHdZ974KFI4Hp8P1RHM5EP2j5jEWVl2VXy9Pi3eV+Kdb
+ojje+ZL5UewQWS5YDNlMTbPPQ1ed+ncPdDUDzjWYhY2SZOia1OLrV/u+KtB/EzkM
+h+Af7F0OLZe1Ti8URCT4lCEg70GqfZVSUh0yN0EiT8bHb7dKr0CMSGdiWcYdBoQN
+MTzlhtSwER0r7Q4LumrbBhmOlT6txi+0XmBRnzH7QYOKJgVMABqWh+H+UTz5qbm8
+OZY+m6jEI7m3yoNnpdwIwjg3BDs1bkZtAvNFo8Xqvv3C8CII3q9aAWwnN7KeU5CZ
+ED24wV0Jg6SKV2eevTGwo52pWCjyvzlG+SPropv/qpP5B9sbRVFDi/cw+vB8m3m3
+1bFgeNviyU+DxOeuxgTlq6DaGJAX9aA+ytdarUEq1c9+w2kukao=
+=5l0t
+-----END PGP SIGNATURE-----
+
+drwx------ 3 usuario usuario 4096 oct 20 12:24 /home/usuario/.gnupg
+
+
+╔══════════╣ Analyzing Bind Files (limit 70)
+drwxr-xr-x 8 root root 4096 oct 20 09:42 /usr/share/maven-repo/com/sun/xml/bind
+drwxr-xr-x 8 root root 4096 oct 20 09:42 /usr/share/maven-repo/com/sun/xml/bind
+drwxr-xr-x 3 root root 4096 oct 20 09:42 /usr/share/maven-repo/com/sun/xml/bind/jaxb-impl
+drwxr-xr-x 2 root root 4096 oct 20 09:42 /usr/share/maven-repo/com/sun/xml/bind/jaxb-impl/debian
+-rw-r--r-- 1 root root 480 ago 17  2019 /usr/share/maven-repo/com/sun/xml/bind/jaxb-impl/debian/jaxb-impl-debian.pom
+drwxr-xr-x 3 root root 4096 oct 20 09:42 /usr/share/maven-repo/com/sun/xml/bind/jaxb-xjc
+drwxr-xr-x 2 root root 4096 oct 20 09:42 /usr/share/maven-repo/com/sun/xml/bind/jaxb-xjc/debian
+-rw-r--r-- 1 root root 475 ago 17  2019 /usr/share/maven-repo/com/sun/xml/bind/jaxb-xjc/debian/jaxb-xjc-debian.pom
+drwxr-xr-x 3 root root 4096 oct 20 09:42 /usr/share/maven-repo/com/sun/xml/bind/jaxb-jxc
+drwxr-xr-x 2 root root 4096 oct 20 09:42 /usr/share/maven-repo/com/sun/xml/bind/jaxb-jxc/debian
+-rw-r--r-- 1 root root 475 ago 17  2019 /usr/share/maven-repo/com/sun/xml/bind/jaxb-jxc/debian/jaxb-jxc-debian.pom
+drwxr-xr-x 4 root root 4096 oct 20 09:42 /usr/share/maven-repo/com/sun/xml/bind/jaxb-bom-ext
+drwxr-xr-x 2 root root 4096 oct 20 09:42 /usr/share/maven-repo/com/sun/xml/bind/jaxb-bom-ext/2.3.0.1
+-rw-r--r-- 1 root root 4019 ago 17  2019 /usr/share/maven-repo/com/sun/xml/bind/jaxb-bom-ext/2.3.0.1/jaxb-bom-ext-2.3.0.1.pom
+drwxr-xr-x 2 root root 4096 oct 20 09:42 /usr/share/maven-repo/com/sun/xml/bind/jaxb-bom-ext/debian
+-rw-r--r-- 1 root root 4018 ago 17  2019 /usr/share/maven-repo/com/sun/xml/bind/jaxb-bom-ext/debian/jaxb-bom-ext-debian.pom
+drwxr-xr-x 7 root root 4096 oct 20 09:42 /usr/share/maven-repo/com/sun/xml/bind/mvn
+drwxr-xr-x 4 root root 4096 oct 20 09:42 /usr/share/maven-repo/com/sun/xml/bind/mvn/jaxb-parent
+drwxr-xr-x 2 root root 4096 oct 20 09:42 /usr/share/maven-repo/com/sun/xml/bind/mvn/jaxb-parent/2.3.0.1
+-rw-r--r-- 1 root root 4764 ago 17  2019 /usr/share/maven-repo/com/sun/xml/bind/mvn/jaxb-parent/2.3.0.1/jaxb-parent-2.3.0.1.pom
+drwxr-xr-x 2 root root 4096 oct 20 09:42 /usr/share/maven-repo/com/sun/xml/bind/mvn/jaxb-parent/debian
+-rw-r--r-- 1 root root 4763 ago 17  2019 /usr/share/maven-repo/com/sun/xml/bind/mvn/jaxb-parent/debian/jaxb-parent-debian.pom
+drwxr-xr-x 4 root root 4096 oct 20 09:42 /usr/share/maven-repo/com/sun/xml/bind/mvn/jaxb-txw-parent
+drwxr-xr-x 2 root root 4096 oct 20 09:42 /usr/share/maven-repo/com/sun/xml/bind/mvn/jaxb-txw-parent/2.3.0.1
+-rw-r--r-- 1 root root 2733 ago 17  2019 /usr/share/maven-repo/com/sun/xml/bind/mvn/jaxb-txw-parent/2.3.0.1/jaxb-txw-parent-2.3.0.1.pom
+drwxr-xr-x 2 root root 4096 oct 20 09:42 /usr/share/maven-repo/com/sun/xml/bind/mvn/jaxb-txw-parent/debian
+-rw-r--r-- 1 root root 2732 ago 17  2019 /usr/share/maven-repo/com/sun/xml/bind/mvn/jaxb-txw-parent/debian/jaxb-txw-parent-debian.pom
+drwxr-xr-x 4 root root 4096 oct 20 09:42 /usr/share/maven-repo/com/sun/xml/bind/mvn/jaxb-codemodel-parent
+drwxr-xr-x 2 root root 4096 oct 20 09:42 /usr/share/maven-repo/com/sun/xml/bind/mvn/jaxb-codemodel-parent/2.3.0.1
+-rw-r--r-- 1 root root 2737 ago 17  2019 /usr/share/maven-repo/com/sun/xml/bind/mvn/jaxb-codemodel-parent/2.3.0.1/jaxb-codemodel-parent-2.3.0.1.pom
+drwxr-xr-x 2 root root 4096 oct 20 09:42 /usr/share/maven-repo/com/sun/xml/bind/mvn/jaxb-codemodel-parent/debian
+-rw-r--r-- 1 root root 2736 ago 17  2019 /usr/share/maven-repo/com/sun/xml/bind/mvn/jaxb-codemodel-parent/debian/jaxb-codemodel-parent-debian.pom
+drwxr-xr-x 4 root root 4096 oct 20 09:42 /usr/share/maven-repo/com/sun/xml/bind/mvn/jaxb-runtime-parent
+drwxr-xr-x 2 root root 4096 oct 20 09:42 /usr/share/maven-repo/com/sun/xml/bind/mvn/jaxb-runtime-parent/2.3.0.1
+-rw-r--r-- 1 root root 2859 ago 17  2019 /usr/share/maven-repo/com/sun/xml/bind/mvn/jaxb-runtime-parent/2.3.0.1/jaxb-runtime-parent-2.3.0.1.pom
+drwxr-xr-x 2 root root 4096 oct 20 09:42 /usr/share/maven-repo/com/sun/xml/bind/mvn/jaxb-runtime-parent/debian
+-rw-r--r-- 1 root root 2858 ago 17  2019 /usr/share/maven-repo/com/sun/xml/bind/mvn/jaxb-runtime-parent/debian/jaxb-runtime-parent-debian.pom
+drwxr-xr-x 4 root root 4096 oct 20 09:42 /usr/share/maven-repo/com/sun/xml/bind/mvn/jaxb-external-parent
+drwxr-xr-x 2 root root 4096 oct 20 09:42 /usr/share/maven-repo/com/sun/xml/bind/mvn/jaxb-external-parent/2.3.0.1
+-rw-r--r-- 1 root root 2725 ago 17  2019 /usr/share/maven-repo/com/sun/xml/bind/mvn/jaxb-external-parent/2.3.0.1/jaxb-external-parent-2.3.0.1.pom
+drwxr-xr-x 2 root root 4096 oct 20 09:42 /usr/share/maven-repo/com/sun/xml/bind/mvn/jaxb-external-parent/debian
+-rw-r--r-- 1 root root 2724 ago 17  2019 /usr/share/maven-repo/com/sun/xml/bind/mvn/jaxb-external-parent/debian/jaxb-external-parent-debian.pom
+drwxr-xr-x 3 root root 4096 oct 20 09:42 /usr/share/maven-repo/com/sun/xml/bind/external
+drwxr-xr-x 4 root root 4096 oct 20 09:42 /usr/share/maven-repo/com/sun/xml/bind/external/rngom
+drwxr-xr-x 2 root root 4096 oct 20 09:42 /usr/share/maven-repo/com/sun/xml/bind/external/rngom/2.3.0.1
+-rw-r--r-- 1 root root 3175 ago 17  2019 /usr/share/maven-repo/com/sun/xml/bind/external/rngom/2.3.0.1/rngom-2.3.0.1.pom
+lrwxrwxrwx 1 root root 38 ago 17  2019 /usr/share/maven-repo/com/sun/xml/bind/external/rngom/2.3.0.1/rngom-2.3.0.1.jar -> ../../../../../../../../java/rngom.jar
+drwxr-xr-x 2 root root 4096 oct 20 09:42 /usr/share/maven-repo/com/sun/xml/bind/external/rngom/debian
+-rw-r--r-- 1 root root 3174 ago 17  2019 /usr/share/maven-repo/com/sun/xml/bind/external/rngom/debian/rngom-debian.pom
+lrwxrwxrwx 1 root root 38 ago 17  2019 /usr/share/maven-repo/com/sun/xml/bind/external/rngom/debian/rngom-debian.jar -> ../../../../../../../../java/rngom.jar
+
+
+drwxr-xr-x 4 root root 4096 oct 20 09:42 /usr/share/maven-repo/javax/xml/bind
+drwxr-xr-x 4 root root 4096 oct 20 09:42 /usr/share/maven-repo/javax/xml/bind
+drwxr-xr-x 4 root root 4096 oct 20 09:42 /usr/share/maven-repo/javax/xml/bind/jaxb-api
+drwxr-xr-x 2 root root 4096 oct 20 09:42 /usr/share/maven-repo/javax/xml/bind/jaxb-api/2.3.1
+-rw-r--r-- 1 root root 2843 nov  1  2018 /usr/share/maven-repo/javax/xml/bind/jaxb-api/2.3.1/jaxb-api-2.3.1.pom
+lrwxrwxrwx 1 root root 35 nov  1  2018 /usr/share/maven-repo/javax/xml/bind/jaxb-api/2.3.1/jaxb-api-2.3.1.jar -> ../../../../../../java/jaxb-api.jar
+drwxr-xr-x 2 root root 4096 oct 20 09:42 /usr/share/maven-repo/javax/xml/bind/jaxb-api/debian
+-rw-r--r-- 1 root root 2844 nov  1  2018 /usr/share/maven-repo/javax/xml/bind/jaxb-api/debian/jaxb-api-debian.pom
+lrwxrwxrwx 1 root root 35 nov  1  2018 /usr/share/maven-repo/javax/xml/bind/jaxb-api/debian/jaxb-api-debian.jar -> ../../../../../../java/jaxb-api.jar
+drwxr-xr-x 4 root root 4096 oct 20 09:42 /usr/share/maven-repo/javax/xml/bind/jaxb-api-parent
+drwxr-xr-x 2 root root 4096 oct 20 09:42 /usr/share/maven-repo/javax/xml/bind/jaxb-api-parent/2.3.1
+-rw-r--r-- 1 root root 3579 nov  1  2018 /usr/share/maven-repo/javax/xml/bind/jaxb-api-parent/2.3.1/jaxb-api-parent-2.3.1.pom
+drwxr-xr-x 2 root root 4096 oct 20 09:42 /usr/share/maven-repo/javax/xml/bind/jaxb-api-parent/debian
+-rw-r--r-- 1 root root 3580 nov  1  2018 /usr/share/maven-repo/javax/xml/bind/jaxb-api-parent/debian/jaxb-api-parent-debian.pom
+
+
+
+╔══════════╣ Analyzing Windows Files (limit 70)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+lrwxrwxrwx 1 root root 26 oct 20 09:44 /etc/alternatives/my.cnf -> /etc/mysql/my.cnf.fallback
+lrwxrwxrwx 1 root root 24 oct 20 09:44 /etc/mysql/my.cnf -> /etc/alternatives/my.cnf
+-rw-r--r-- 1 root root 56 oct 20 09:44 /var/lib/dpkg/alternatives/my.cnf
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+╔══════════╣ Analyzing Other Interesting Files (limit 70)
+-rw-r--r-- 1 root root 3771 jun 18  2020 /etc/skel/.bashrc
+-rw-r--r-- 1 usuario usuario 3771 oct 20 09:49 /home/usuario/.bashrc
+
+
+
+
+
+-rw-r--r-- 1 root root 807 jun 18  2020 /etc/skel/.profile
+-rw-r--r-- 1 usuario usuario 807 oct 20 09:49 /home/usuario/.profile
+
+
+
+
+
+
+                               ╔═══════════════════╗
+═══════════════════════════════╣ Interesting Files ╠═══════════════════════════════
+                               ╚═══════════════════╝
+╔══════════╣ SUID - Check easy privesc, exploits and write perms
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#sudo-and-suid
+-rwsr-xr-- 1 root dip 386K jul 23  2020 /usr/sbin/pppd  --->  Apple_Mac_OSX_10.4.8(05-2007)
+-rwsr-xr-x 1 root root 23K ago 16  2019 /usr/lib/policykit-1/polkit-agent-helper-1
+-rwsr-xr-x 1 root root 15K jul  8  2019 /usr/lib/eject/dmcrypt-get-device
+-rwsr-xr-x 1 root root 463K may 29  2020 /usr/lib/openssh/ssh-keysign
+-rwsr-xr-- 1 root messagebus 51K abr 29 14:03 /usr/lib/dbus-1.0/dbus-daemon-launch-helper
+-rwsr-xr-x 1 root root 231K abr  9  2020 /usr/share/geogebra/chrome-sandbox
+-rwsr-xr-x 1 root root 39K mar  7  2020 /usr/bin/fusermount
+-rwsr-xr-x 1 root root 55K abr  2  2020 /usr/bin/mount  --->  Apple_Mac_OSX(Lion)_Kernel_xnu-1699.32.7_except_xnu-1699.24.8
+-rwsr-xr-x 1 root root 163K feb  3  2020 /usr/bin/sudo  --->  check_if_the_sudo_version_is_vulnerable
+-rwsr-xr-x 1 root root 84K may 28  2020 /usr/bin/chfn  --->  SuSE_9.3/10
+-rwsr-xr-x 1 root root 31K ago 16  2019 /usr/bin/pkexec  --->  Linux4.10_to_5.1.17(CVE-2019-13272)/rhel_6(CVE-2011-1485)
+-rwsr-xr-x 1 root root 87K may 28  2020 /usr/bin/gpasswd
+-rwsr-xr-x 1 root root 67K abr  2  2020 /usr/bin/su
+-rwsr-xr-x 1 root root 44K may 28  2020 /usr/bin/newgrp  --->  HP-UX_10.20
+-rwsr-xr-x 1 root root 39K abr  2  2020 /usr/bin/umount  --->  BSD/Linux(08-1996)
+-rwsr-xr-x 1 root root 67K may 28  2020 /usr/bin/passwd  --->  Apple_Mac_OSX(03-2006)/Solaris_8/9(12-2004)/SPARC_8/9/Sun_Solaris_2.3_to_2.5.1(02-1997)
+-rwsr-xr-x 1 root root 52K may 28  2020 /usr/bin/chsh
+
+╔══════════╣ SGID
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#sudo-and-suid
+-rwxr-sr-x 1 root shadow 43K abr 28  2021 /usr/sbin/unix_chkpwd
+-rwxr-sr-x 1 root shadow 43K abr 28  2021 /usr/sbin/pam_extrausers_chkpwd
+-rwxr-sr-x 1 root utmp 15K sep 30  2019 /usr/lib/x86_64-linux-gnu/utempter/utempter
+-rwxr-sr-x 1 root mail 23K jul  8  2020 /usr/libexec/camel-lock-helper-1.2
+-rwxr-sr-x 1 root games 212K ago 13  2019 /usr/games/tuxtype (Unknown SGID binary)
+-rwxr-sr-x 1 root shadow 83K may 28  2020 /usr/bin/chage
+-rwxr-sr-x 1 root tty 15K mar 30  2020 /usr/bin/bsd-write
+-rwxr-sr-x 1 root shadow 31K may 28  2020 /usr/bin/expiry
+-rwxr-sr-x 1 root ssh 343K may 29  2020 /usr/bin/ssh-agent
+-rwxr-sr-x 1 root crontab 43K feb 13  2020 /usr/bin/crontab
+-rwxr-sr-x 1 root tty 35K abr  2  2020 /usr/bin/wall
+
+╔══════════╣ Checking misconfigurations of ld.so
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#ld-so
+/etc/ld.so.conf
+include /etc/ld.so.conf.d/*.conf
+
+/etc/ld.so.conf.d
+  /etc/ld.so.conf.d/fakeroot-x86_64-linux-gnu.conf
+/usr/lib/x86_64-linux-gnu/libfakeroot
+  /etc/ld.so.conf.d/libc.conf
+/usr/local/lib
+  /etc/ld.so.conf.d/x86_64-linux-gnu.conf
+/usr/local/lib/x86_64-linux-gnu
+/lib/x86_64-linux-gnu
+/usr/lib/x86_64-linux-gnu
+
+╔══════════╣ Capabilities
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#capabilities
+Current env capabilities:
+Current: =
+Current proc capabilities:
+CapInh:	0000000000000000
+CapPrm:	0000000000000000
+CapEff:	0000000000000000
+CapBnd:	0000003fffffffff
+CapAmb:	0000000000000000
+
+Parent Shell capabilities:
+0x0000000000000000=
+
+Files with capabilities (limited to 50):
+/usr/lib/x86_64-linux-gnu/gstreamer1.0/gstreamer-1.0/gst-ptp-helper = cap_net_bind_service,cap_net_admin+ep
+/usr/bin/gnome-keyring-daemon = cap_ipc_lock+ep
+/usr/bin/ping = cap_net_raw+ep
+
+╔══════════╣ AppArmor binary profiles
+-rw-r--r-- 1 root root  3222 mar 11  2020 sbin.dhclient
+-rw-r--r-- 1 root root 11082 jul  7  2020 usr.bin.evince
+-rw-r--r-- 1 root root  9793 sep 19 18:40 usr.bin.firefox
+-rw-r--r-- 1 root root  3202 feb 25  2020 usr.bin.man
+-rw-r--r-- 1 root root  1519 oct  9  2021 usr.lib.libreoffice.program.oosplash
+-rw-r--r-- 1 root root  1227 oct  9  2021 usr.lib.libreoffice.program.senddoc
+-rw-r--r-- 1 root root 10731 oct  9  2021 usr.lib.libreoffice.program.soffice.bin
+-rw-r--r-- 1 root root  1046 oct  9  2021 usr.lib.libreoffice.program.xpdfimport
+-rw-r--r-- 1 root root   540 may 12  2020 usr.sbin.cups-browsed
+-rw-r--r-- 1 root root  5797 abr 24  2020 usr.sbin.cupsd
+-rw-r--r-- 1 root root  1575 feb 11  2020 usr.sbin.rsyslogd
+
+╔══════════╣ Files with ACLs (limited to 50)
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#acls
+files with acls in searched folders Not Found
+
+╔══════════╣ .sh files in path
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#script-binaries-in-path
+/usr/sbin/password_users.sh
+/usr/sbin/cga-update-manager-stop.sh
+/usr/sbin/cga-autologout-shutdown.sh
+/usr/sbin/andared-network-restore.sh
+/usr/bin/cga-usb-creator-launcher.sh
+/usr/bin/congelar.sh
+/usr/bin/gettext.sh
+/usr/bin/cga-congelador.sh
+/usr/bin/xlogo.sh
+/usr/bin/menucategories.sh
+/usr/bin/hotpotatoes.sh
+/usr/bin/amuFormat.sh
+/usr/bin/eecc-clearpass-autologout.sh
+/usr/bin/scanner-usb.sh
+
+╔══════════╣ Executable files potentially added by user (limit 70)
+2022-10-20+10:49:24.2586211850 /home/usuario/.mozilla/firefox/3udceohk.default-release/gmp-gmpopenh264/1.8.1.2/libgmpopenh264.so
+2022-10-20+10:49:24.2426308410 /home/usuario/.mozilla/firefox/3udceohk.default-release/gmp-gmpopenh264/1.8.1.2/gmpopenh264.info
+2022-10-20+10:48:41.6794271340 /home/usuario/.mozilla/firefox/3udceohk.default-release/times.json
+2022-10-20+10:48:40.4514719290 /home/usuario/.mozilla/firefox/tg1foghp.default/times.json
+2022-10-20+10:25:33.2831706510 /var/cache/app-info/cache/C.cache
+2022-10-20+10:02:12.0636072660 /var/cache/app-info/cache/es_ES.cache
+2022-10-20+10:00:55.6853298570 /etc/rc.local
+2022-10-20+09:49:24.3389976170 /etc/grub.d/60_recovery_eos
+2022-10-20+09:48:01.1670024980 /etc/console-setup/cached_setup_terminal.sh
+2022-10-20+09:48:01.1670024980 /etc/console-setup/cached_setup_keyboard.sh
+2022-10-20+09:48:01.1670024980 /etc/console-setup/cached_setup_font.sh
+2022-10-20+09:45:08.2630126440 /etc/network/if-up.d/transfermac
+2022-10-20+09:45:00.5350130970 /etc/gdm3/PostSession/Default
+2022-10-20+09:40:36.3870285980 /usr/lib/jvm/java-8-oracle/jre/lib/fontconfig.Ubuntu.properties
+2022-10-20+09:40:36.3790285980 /usr/lib/jvm/java-8-oracle/jre/lib/jar.binfmt
+2022-10-20+09:40:36.3790285980 /usr/lib/jvm/java-8-oracle/jre/bin/javaws
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/xjc
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/wsimport
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/wsgen
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/unpack200
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/tnameserv
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/servertool
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/serialver
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/schemagen
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/rmiregistry
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/rmid
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/rmic
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/policytool
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/pack200
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/orbd
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/native2ascii
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/keytool
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/jvisualvm
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/jstatd
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/jstat
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/jstack
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/jsadebugd
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/jrunscript
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/jps
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/jmc.ini
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/jmc
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/jmap
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/jjs
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/jinfo
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/jhat
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/jdeps
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/jdb
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/jcontrol
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/jconsole
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/jcmd
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/javaws
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/java-rmi.cgi
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/javapackager
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/javap
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/javah
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/javafxpackager
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/javadoc
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/javac
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/java
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/jarsigner
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/jar
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/idlj
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/extcheck
+2022-10-20+09:40:36.3750285980 /usr/lib/jvm/java-8-oracle/bin/appletviewer
+2022-10-20+09:40:36.3550285990 /usr/lib/jvm/java-8-oracle/lib/visualvm/profiler/lib/deployed/jdk16/linux-amd64/libprofilerinterface.so
+2022-10-20+09:40:36.3550285990 /usr/lib/jvm/java-8-oracle/lib/visualvm/profiler/lib/deployed/jdk15/linux-amd64/libprofilerinterface.so
+2022-10-20+09:40:36.3230286010 /usr/lib/jvm/java-8-oracle/lib/visualvm/platform/lib/nbexec
+2022-10-20+09:40:36.2830286040 /usr/lib/jvm/java-8-oracle/lib/amd64/libjawt.so
+2022-10-20+09:40:36.2830286040 /usr/lib/jvm/java-8-oracle/lib/amd64/jli/libjli.so
+2022-10-20+09:40:36.2750286040 /usr/lib/jvm/java-8-oracle/lib/missioncontrol/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_64_1.1.200.v20141007-2033/eclipse_1605.so
+
+╔══════════╣ Unexpected in /opt (usually empty)
+total 12
+drwxr-xr-x  3 root root 4096 oct 20 09:37  .
+drwxr-xr-x 20 root root 4096 oct 20 10:00  ..
+drwxr-xr-x  3 root root 4096 oct 20 09:37 'SMART Technologies'
+
+╔══════════╣ Unexpected in root
+/swapfile
+/extensions
+
+╔══════════╣ Files (scripts) in /etc/profile.d/
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#profiles-files
+total 44
+drwxr-xr-x   2 root root  4096 oct 20 09:44 .
+drwxr-xr-x 141 root root 12288 oct 20 12:19 ..
+-rw-r--r--   1 root root    96 ago  5  2020 01-locale-fix.sh
+-rw-r--r--   1 root root  1003 may 12  2020 cedilla-portuguese.sh
+-rwxr-xr-x   1 root root   268 abr  7  2020 jdk.csh
+-rwxr-xr-x   1 root root   266 abr  7  2020 jdk.sh
+-rw-r--r--   1 root root  1368 jun 11  2020 vte-2.91.sh
+-rw-r--r--   1 root root   966 jun 11  2020 vte.csh
+-rw-r--r--   1 root root   954 mar 26  2020 xdg_dirs_desktop_session.sh
+
+╔══════════╣ Permissions in init, init.d, systemd, and rc.d
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#init-init-d-systemd-and-rc-d
+
+═╣ Hashes inside passwd file? ........... No
+═╣ Writable passwd file? ................ No
+═╣ Credentials in fstab/mtab? ........... No
+═╣ Can I read shadow files? ............. No
+═╣ Can I read shadow plists? ............ No
+═╣ Can I write shadow plists? ........... No
+═╣ Can I read opasswd file? ............. No
+═╣ Can I write in network-scripts? ...... No
+═╣ Can I read root folder? .............. No
+
+╔══════════╣ Searching root files in home dirs (limit 30)
+/home/
+/root/
+
+╔══════════╣ Searching folders owned by me containing others files on it (limit 100)
+/sys/fs/cgroup/systemd/user.slice/user-1000.slice/user@1000.service
+/usr/lib/AutoFirma
+/usr/lib/AutoFirmaJA
+/usr/share/AutoFirmaJA
+
+╔══════════╣ Readable files belonging to root and readable by me but not world readable
+-rw-r----- 1 root adm 680649 oct 20 10:26 /var/log/apt/term.log
+-rw-r----- 1 root lpadmin 0 oct 20 09:45 /var/log/cups/cups-pdf_log
+-rw-r----- 1 root adm 91 oct 20 12:13 /var/log/cups/error_log
+-rw-r----- 1 root adm 7117 oct 20 12:19 /var/log/cups/access_log
+-rw-r----- 1 root dip 1093 oct 20 09:44 /etc/ppp/peers/provider
+-rw-r----- 1 root dip 656 oct 20 09:44 /etc/chatscripts/provider
+
+╔══════════╣ Modified interesting files in the last 5mins (limit 100)
+/tmp/cga-apt.5ST3O
+/tmp/config-err-aKPKG8
+/var/log/auth.log
+/var/log/journal/834b55c22a114749b23a982f1e8714b4/system.journal
+/var/log/journal/834b55c22a114749b23a982f1e8714b4/user-1000.journal
+/var/log/dpkg.log
+/var/log/kern.log
+/var/log/wtmp
+/var/log/cga-update-manager/cga-updater.log
+/var/log/cups/access_log
+/var/log/syslog
+/var/log/ticboxcloud_ldap_auth.log
+/var/cache/apt/srcpkgcache.bin
+/var/cache/apt/pkgcache.bin
+/etc/cups/subscriptions.conf
+/home/usuario/reporte.txt
+/home/usuario/Calibre Library/metadata_db_prefs_backup.json
+/home/usuario/Calibre Library/metadata.db
+/home/usuario/Calibre Library/John Schember/Quick Start Guide (1)/metadata.opf
+/home/usuario/Calibre Library/John Schember/Quick Start Guide (1)/Quick Start Guide - John Schember.epub
+/home/usuario/Calibre Library/John Schember/Quick Start Guide (1)/cover.jpg
+/home/usuario/.local/share/recently-used.xbel
+/home/usuario/.local/share/tracker/data/tracker-store.journal
+/home/usuario/.local/share/xorg/Xorg.0.log
+/home/usuario/.local/share/zeitgeist/fts.index/termlist.glass
+/home/usuario/.local/share/zeitgeist/fts.index/postlist.glass
+/home/usuario/.local/share/zeitgeist/fts.index/iamglass
+/home/usuario/.local/share/zeitgeist/fts.index/flintlock
+/home/usuario/.local/share/zeitgeist/fts.index/position.glass
+/home/usuario/.local/share/zeitgeist/activity.sqlite-shm
+/home/usuario/.local/share/zeitgeist/activity.sqlite-wal
+/home/usuario/.local/share/gvfs-metadata/root
+/home/usuario/.local/share/gvfs-metadata/root-4efb014d.log
+/home/usuario/.local/share/gvfs-metadata/home-6f692159.log
+/home/usuario/.local/share/gvfs-metadata/home
+/home/usuario/.local/share/evolution/addressbook/system/contacts.db
+/home/usuario/.bash_history
+/home/usuario/.cache/tracker/meta.db-shm
+/home/usuario/.cache/tracker/meta.db
+/home/usuario/.cache/tracker/meta.db-wal
+/home/usuario/.config/dconf/user
+/home/usuario/.config/gedit/accels
+/home/usuario/.config/libreoffice/4/user/registrymodifications.xcu
+/home/usuario/.config/libreoffice/4/user/extensions/bundled/lastsynchronized
+/home/usuario/.config/libreoffice/4/user/extensions/shared/lastsynchronized
+/home/usuario/.config/libreoffice/4/user/pack/registrymodifications.pack
+/home/usuario/.config/ibus/bus/834b55c22a114749b23a982f1e8714b4-unix-0
+/home/usuario/.config/gtk-3.0/bookmarks
+/home/usuario/.config/QtProject.conf
+/home/usuario/.config/pulse/834b55c22a114749b23a982f1e8714b4-default-source
+/home/usuario/.config/pulse/834b55c22a114749b23a982f1e8714b4-default-sink
+/home/usuario/.config/monitors.xml
+/home/usuario/.config/monitors.xml~
+/home/usuario/.config/calibre/gui.py.json
+/home/usuario/.config/calibre/gui.json
+/home/usuario/.config/calibre/dynamic.pickle.json
+/home/usuario/.config/calibre/global.py.json
+/home/usuario/.config/calibre/fonts/scanner_cache.json
+
+╔══════════╣ Writable log files (logrotten) (limit 50)
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#logrotate-exploitation
+logrotate 3.14.0
+
+    Default mail command:       /usr/bin/mail
+    Default compress command:   /bin/gzip
+    Default uncompress command: /bin/gunzip
+    Default compress extension: .gz
+    Default state file path:    /var/lib/logrotate/status
+    ACL support:                yes
+    SELinux support:            yes
+Writable: /usr/share/cga-physical-etoys-2.0/contents/SqueakDebug.log
+sh: 4658: [: ImPOsSiBleeElastWlogFolder: unexpected operator
+Writable: /var/log/cga-update-manager/cga-updater.log
+Writable: /home/usuario/.local/share/xorg/Xorg.0.log
+Writable: /home/usuario/.local/share/xorg/Xorg.0.log.old
+Writable: /home/usuario/.local/share/gvfs-metadata/root-4efb014d.log
+Writable: /home/usuario/.local/share/gvfs-metadata/home-6f692159.log
+Writable: /home/usuario/.cache/mozilla/firefox/3udceohk.default-release/cache2/index.log
+
+╔══════════╣ Files inside /home/usuario (limit 20)
+total 148
+drwxr-xr-x 19 usuario usuario  4096 oct 20 12:23 .
+drwxr-xr-x  3 root    root     4096 oct 20 09:49 ..
+-rw-------  1 usuario usuario  1771 oct 20 12:22 .bash_history
+-rw-r--r--  1 usuario usuario   220 oct 20 09:49 .bash_logout
+-rw-r--r--  1 usuario usuario  3771 oct 20 09:49 .bashrc
+drwxrwxr-x  2 usuario usuario  4096 oct 20 12:23 Biblioteca de calibre
+drwx------ 13 usuario usuario  4096 oct 20 12:23 .cache
+drwxrwxr-x  3 usuario usuario  4096 oct 20 12:23 Calibre Library
+drwxr-xr-x 17 usuario usuario  4096 oct 20 12:23 .config
+drwxr-xr-x  2 usuario usuario  4096 oct 20 09:55 Descargas
+-rw-rw-r--  1 usuario usuario  4171 oct 20 11:18 Documento sin título 1
+drwxr-xr-x  2 usuario usuario  4096 oct 20 09:55 Documentos
+drwxr-xr-x  2 usuario usuario  4096 oct 20 12:18 Escritorio
+-rw-r--r--  1 usuario usuario  8980 oct 20 09:49 examples.desktop
+drwx------  2 usuario usuario  4096 oct 20 09:55 .gconf
+drwx------  3 usuario usuario  4096 oct 20 12:24 .gnupg
+drwxr-xr-x  2 usuario usuario  4096 oct 20 09:55 Imágenes
+drwxr-xr-x  3 usuario usuario  4096 oct 20 09:55 .local
+drwx------  4 usuario usuario  4096 oct 20 10:48 .mozilla
+drwxr-xr-x  2 usuario usuario  4096 oct 20 09:55 Música
+drwxr-xr-x  2 usuario usuario  4096 oct 20 09:55 Plantillas
+-rw-r--r--  1 usuario usuario   807 oct 20 09:49 .profile
+
+╔══════════╣ Files inside others home (limit 20)
+
+╔══════════╣ Searching installed mail applications
+
+╔══════════╣ Mails (limit 50)
+
+╔══════════╣ Backup files (limited 100)
+-rw-r--r-- 1 root root 49715 ene  8  2020 /usr/lib/python3/dist-packages/samba/netcmd/domain_backup.py
+-rw-r--r-- 1 root root 29934 oct 20 09:45 /usr/lib/python3/dist-packages/samba/netcmd/__pycache__/domain_backup.cpython-38.pyc
+-rw-r--r-- 1 root root 6587 ene  8  2020 /usr/lib/python3/dist-packages/samba/tests/ntacls_backup.py
+-rw-r--r-- 1 root root 27406 dic  6  2019 /usr/lib/python3/dist-packages/samba/tests/domain_backup.py
+-rw-r--r-- 1 root root 19838 oct 20 09:45 /usr/lib/python3/dist-packages/samba/tests/__pycache__/domain_backup.cpython-38.pyc
+-rw-r--r-- 1 root root 3943 oct 20 09:45 /usr/lib/python3/dist-packages/samba/tests/__pycache__/domain_backup_offline.cpython-38.pyc
+-rw-r--r-- 1 root root 4996 oct 20 09:45 /usr/lib/python3/dist-packages/samba/tests/__pycache__/ntacls_backup.cpython-38.pyc
+-rw-r--r-- 1 root root 5307 dic  6  2019 /usr/lib/python3/dist-packages/samba/tests/domain_backup_offline.py
+-rw-r--r-- 1 root root 8169 ene 27  2021 /usr/lib/modules/5.4.0-66-generic/kernel/drivers/net/team/team_mode_activebackup.ko
+-rw-r--r-- 1 root root 8737 ene 27  2021 /usr/lib/modules/5.4.0-66-generic/kernel/drivers/power/supply/wm831x_backup.ko
+-rw-r--r-- 1 root root 2008 oct 20 09:47 /usr/lib/calibre/calibre/db/cli/__pycache__/cmd_backup_metadata.cpython-38.pyc
+-rw-r--r-- 1 root root 1766 dic 23  2020 /usr/lib/calibre/calibre/db/cli/cmd_backup_metadata.py
+-rw-r--r-- 1 root root 3001 oct 20 09:47 /usr/lib/calibre/calibre/db/__pycache__/backup.cpython-38.pyc
+-rw-r--r-- 1 root root 3357 dic 23  2020 /usr/lib/calibre/calibre/db/backup.py
+-rw-r--r-- 1 root root 88856 may 14  2020 /usr/src/rtlwifi-new-0.6/firmware/rtlwifi/rtl8192sefw.old.bin
+-rwxr-xr-x 1 root root 1086 nov 25  2019 /usr/src/linux-headers-5.4.0-66/tools/testing/selftests/net/tcp_fastopen_backup_key.sh
+-rw-r--r-- 1 root root 237741 ene 27  2021 /usr/src/linux-headers-5.4.0-66-generic/.config.old
+-rw-r--r-- 1 root root 0 ene 27  2021 /usr/src/linux-headers-5.4.0-66-generic/include/config/wm831x/backup.h
+-rw-r--r-- 1 root root 0 ene 27  2021 /usr/src/linux-headers-5.4.0-66-generic/include/config/net/team/mode/activebackup.h
+-rwxrwxrwx 1 root root 405657 may 18  2020 /usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr/etc/avrdude.old
+-rw-r--r-- 1 root root 15451 oct 20 09:49 /usr/share/info/dir.old
+-rw-r--r-- 1 root root 475 mar 10  2020 /usr/share/tracker/tracker-backup.xml
+-rw-r--r-- 1 root root 2669 abr  5  2020 /usr/share/help-langpack/fr/seahorse/misc-key-backup.page
+-rw-r--r-- 1 root root 979 jun 16  2020 /usr/share/help-langpack/fr/deja-dup/backup-first.page
+-rw-r--r-- 1 root root 1233 jun 16  2020 /usr/share/help-langpack/fr/deja-dup/backup-auto.page
+-rw-r--r-- 1 root root 4633 jun 19  2020 /usr/share/help-langpack/fr/evolution/backup-restore.page
+-rw-r--r-- 1 root root 837 jun 16  2020 /usr/share/help-langpack/ar/deja-dup/backup-first.page
+-rw-r--r-- 1 root root 1056 jun 16  2020 /usr/share/help-langpack/ar/deja-dup/backup-auto.page
+-rw-r--r-- 1 root root 840 jun 16  2020 /usr/share/help-langpack/en_GB/deja-dup/backup-first.page
+-rw-r--r-- 1 root root 1059 jun 16  2020 /usr/share/help-langpack/en_GB/deja-dup/backup-auto.page
+-rw-r--r-- 1 root root 2544 jun 19  2020 /usr/share/help-langpack/en_GB/evolution/backup-restore.page
+-rw-r--r-- 1 root root 1958 abr  5  2020 /usr/share/help-langpack/es/seahorse/misc-key-backup.page
+-rw-r--r-- 1 root root 861 jun 16  2020 /usr/share/help-langpack/es/deja-dup/backup-first.page
+-rw-r--r-- 1 root root 1137 jun 16  2020 /usr/share/help-langpack/es/deja-dup/backup-auto.page
+-rw-r--r-- 1 root root 3809 jun 19  2020 /usr/share/help-langpack/es/evolution/backup-restore.page
+-rw-r--r-- 1 root root 840 jun 16  2020 /usr/share/help-langpack/en_AU/deja-dup/backup-first.page
+-rw-r--r-- 1 root root 1059 jun 16  2020 /usr/share/help-langpack/en_AU/deja-dup/backup-auto.page
+-rw-r--r-- 1 root root 2959 jun 19  2020 /usr/share/help-langpack/uk/evolution/backup-restore.page
+-rw-r--r-- 1 root root 1581 mar 10  2020 /usr/share/help/C/seahorse/misc-key-backup.page
+-rw-r--r-- 1 usuario usuario 0 may 18  2018 /usr/share/AutoFirmaJA/index.txt.old
+-rw-r--r-- 1 usuario usuario 4 may 18  2018 /usr/share/AutoFirmaJA/serial.txt.old
+-rw-r--r-- 1 root root 21 oct 20 09:45 /usr/share/AutoFirmaJA/index.txt.attr.old
+-rw-r--r-- 1 root root 128 oct 20 09:44 /var/lib/sgml-base/supercatalog.old
+-rw-r--r-- 1 root root 364 oct 20 09:48 /etc/xml/docbook-xsl.xml.old
+-rw-r--r-- 1 root root 673 oct 20 09:45 /etc/xml/xml-core.xml.old
+-rw-r--r-- 1 root root 874 oct 20 09:48 /etc/xml/catalog.old
+-rw-rw-r-- 1 usuario usuario 13082 oct 20 12:23 /home/usuario/Calibre Library/metadata_db_prefs_backup.json
+-rw-r--r-- 1 usuario usuario 26453 oct 20 12:18 /home/usuario/.local/share/xorg/Xorg.0.log.old
+
+╔══════════╣ Searching tables inside readable .db/.sql/.sqlite files (limit 100)
+Found /home/usuario/.cache/tracker/meta.db: SQLite 3.x database, last written using SQLite version 3031001
+Found /home/usuario/Calibre Library/metadata.db: SQLite 3.x database, user version 23, last written using SQLite version 3031001
+Found /home/usuario/.local/share/evolution/addressbook/system/contacts.db: SQLite 3.x database, last written using SQLite version 3031001
+Found /home/usuario/.local/share/zeitgeist/activity.sqlite: SQLite 3.x database, last written using SQLite version 3031001
+Found /home/usuario/.mozilla/firefox/3udceohk.default-release/cert9.db: SQLite 3.x database, last written using SQLite version 3038003
+Found /home/usuario/.mozilla/firefox/3udceohk.default-release/content-prefs.sqlite: SQLite 3.x database, user version 4, last written using SQLite version 3038003
+Found /home/usuario/.mozilla/firefox/3udceohk.default-release/cookies.sqlite: SQLite 3.x database, user version 12, last written using SQLite version 3038003
+Found /home/usuario/.mozilla/firefox/3udceohk.default-release/favicons.sqlite: SQLite 3.x database, last written using SQLite version 3038003
+Found /home/usuario/.mozilla/firefox/3udceohk.default-release/formhistory.sqlite: SQLite 3.x database, user version 5, last written using SQLite version 3038003
+Found /home/usuario/.mozilla/firefox/3udceohk.default-release/key4.db: SQLite 3.x database, last written using SQLite version 3038003
+Found /home/usuario/.mozilla/firefox/3udceohk.default-release/permissions.sqlite: SQLite 3.x database, user version 12, last written using SQLite version 3038003
+Found /home/usuario/.mozilla/firefox/3udceohk.default-release/places.sqlite: SQLite 3.x database, user version 69, last written using SQLite version 3038003
+Found /home/usuario/.mozilla/firefox/3udceohk.default-release/protections.sqlite: SQLite 3.x database, user version 1, last written using SQLite version 3038003
+Found /home/usuario/.mozilla/firefox/3udceohk.default-release/storage/default/https+++book.hacktricks.xyz/idb/2076414780cearcohtes-efri.sqlite: SQLite 3.x database, user version 416, last written using SQLite version 3038003
+Found /home/usuario/.mozilla/firefox/3udceohk.default-release/storage/default/https+++book.hacktricks.xyz/idb/3547115956fbiDreegbaarsoetLSolc.sqlite: SQLite 3.x database, user version 416, last written using SQLite version 3038003
+Found /home/usuario/.mozilla/firefox/3udceohk.default-release/storage/default/https+++book.hacktricks.xyz/idb/3713173747_s_edmban.sqlite: SQLite 3.x database, user version 416, last written using SQLite version 3038003
+Found /home/usuario/.mozilla/firefox/3udceohk.default-release/storage/default/https+++book.hacktricks.xyz/ls/data.sqlite: SQLite 3.x database, user version 80, last written using SQLite version 3038003
+Found /home/usuario/.mozilla/firefox/3udceohk.default-release/storage/default/https+++github.com/ls/data.sqlite: SQLite 3.x database, user version 80, last written using SQLite version 3038003
+Found /home/usuario/.mozilla/firefox/3udceohk.default-release/storage/default/https+++justbeamit.com/ls/data.sqlite: SQLite 3.x database, user version 80, last written using SQLite version 3038003
+Found /home/usuario/.mozilla/firefox/3udceohk.default-release/storage/default/https+++www.google.com/ls/data.sqlite: SQLite 3.x database, user version 80, last written using SQLite version 3038003
+Found /home/usuario/.mozilla/firefox/3udceohk.default-release/storage/ls-archive.sqlite: SQLite 3.x database, user version 2, last written using SQLite version 3038003
+Found /home/usuario/.mozilla/firefox/3udceohk.default-release/storage/permanent/chrome/idb/1451318868ntouromlalnodry--epcr.sqlite: SQLite 3.x database, user version 416, last written using SQLite version 3038003
+Found /home/usuario/.mozilla/firefox/3udceohk.default-release/storage/permanent/chrome/idb/1657114595AmcateirvtiSty.sqlite: SQLite 3.x database, user version 416, last written using SQLite version 3038003
+Found /home/usuario/.mozilla/firefox/3udceohk.default-release/storage/permanent/chrome/idb/2823318777ntouromlalnodry--naod.sqlite: SQLite 3.x database, user version 416, last written using SQLite version 3038003
+Found /home/usuario/.mozilla/firefox/3udceohk.default-release/storage/permanent/chrome/idb/2918063365piupsah.sqlite: SQLite 3.x database, user version 416, last written using SQLite version 3038003
+Found /home/usuario/.mozilla/firefox/3udceohk.default-release/storage/permanent/chrome/idb/3561288849sdhlie.sqlite: SQLite 3.x database, user version 416, last written using SQLite version 3038003
+Found /home/usuario/.mozilla/firefox/3udceohk.default-release/storage/permanent/chrome/idb/3870112724rsegmnoittet-es.sqlite: SQLite 3.x database, user version 416, last written using SQLite version 3038003
+Found /home/usuario/.mozilla/firefox/3udceohk.default-release/storage.sqlite: SQLite 3.x database, user version 131075, last written using SQLite version 3038003
+Found /home/usuario/.mozilla/firefox/3udceohk.default-release/webappsstore.sqlite: SQLite 3.x database, user version 2, last written using SQLite version 3038003
+Found /var/lib/colord/mapping.db: SQLite 3.x database, last written using SQLite version 3031001
+Found /var/lib/colord/storage.db: SQLite 3.x database, last written using SQLite version 3031001
+Found /var/lib/gdm3/.cache/tracker/meta.db: SQLite 3.x database, last written using SQLite version 3031001
+Found /var/lib/PackageKit/transactions.db: SQLite 3.x database, last written using SQLite version 3031001
+
+ -> Extracting tables from /home/usuario/.cache/tracker/meta.db (limit 20)
+  --> Found interesting column names in nco:Role_nco:hasEmailAddress (output limit 10)
+CREATE TABLE "nco:Role_nco:hasEmailAddress" (ID INTEGER NOT NULL, "nco:hasEmailAddress" INTEGER NOT NULL, "nco:hasEmailAddress:graph" INTEGER)
+
+  --> Found interesting column names in nco:EmailAddress (output limit 10)
+CREATE TABLE "nco:EmailAddress" (ID INTEGER NOT NULL PRIMARY KEY, "nco:emailAddress" TEXT COLLATE TRACKER UNIQUE, "nco:emailAddress:graph" INTEGER)
+
+  --> Found interesting column names in nco:VoicePhoneNumber (output limit 10)
+CREATE TABLE "nco:VoicePhoneNumber" (ID INTEGER NOT NULL PRIMARY KEY, "nco:voiceMail" INTEGER, "nco:voiceMail:graph" INTEGER)
+
+  --> Found interesting column names in nfo:FileDataObject (output limit 10)
+CREATE TABLE "nfo:FileDataObject" (ID INTEGER NOT NULL PRIMARY KEY, "nfo:fileLastAccessed" INTEGER, "nfo:fileLastAccessed:graph" INTEGER, "nfo:fileLastAccessed:localDate" INTEGER, "nfo:fileLastAccessed:localTime" INTEGER, "nfo:fileCreated" INTEGER, "nfo:fileCreated:graph" INTEGER, "nfo:fileCreated:localDate" INTEGER, "nfo:fileCreated:localTime" INTEGER, "nfo:fileSize" INTEGER, "nfo:fileSize:graph" INTEGER, "nfo:permissions" TEXT COLLATE TRACKER, "nfo:permissions:graph" INTEGER, "nfo:fileName" TEXT COLLATE TRACKER, "nfo:fileName:graph" INTEGER, "nfo:hasHash" INTEGER, "nfo:hasHash:graph" INTEGER, "nfo:fileOwner" INTEGER, "nfo:fileOwner:graph" INTEGER, "nfo:fileLastModified" INTEGER, "nfo:fileLastModified:graph" INTEGER, "nfo:fileLastModified:localDate" INTEGER, "nfo:fileLastModified:localTime" INTEGER)
+100003, 1666261122, 100002, 19285, 37122, None, None, None, None, 4096, 100002, None, None, Escritorio, 100002, None, None, None, None, 1666261122, 100002, 19285, 37122
+
+  --> Found interesting column names in nfo:FileHash (output limit 10)
+CREATE TABLE "nfo:FileHash" (ID INTEGER NOT NULL PRIMARY KEY, "nfo:hashValue" TEXT COLLATE TRACKER, "nfo:hashValue:graph" INTEGER, "nfo:hashAlgorithm" TEXT COLLATE TRACKER, "nfo:hashAlgorithm:graph" INTEGER)
+
+  --> Found interesting column names in nfo:ArchiveItem (output limit 10)
+CREATE TABLE "nfo:ArchiveItem" (ID INTEGER NOT NULL PRIMARY KEY, "nfo:isPasswordProtected" INTEGER, "nfo:isPasswordProtected:graph" INTEGER)
+
+  --> Found interesting column names in nmo:Email_nmo:contentMimeType (output limit 10)
+CREATE TABLE "nmo:Email_nmo:contentMimeType" (ID INTEGER NOT NULL, "nmo:contentMimeType" TEXT NOT NULL, "nmo:contentMimeType:graph" INTEGER)
+
+  --> Found interesting column names in nmo:Email (output limit 10)
+CREATE TABLE "nmo:Email" (ID INTEGER NOT NULL PRIMARY KEY, "nmo:hasContent" INTEGER, "nmo:hasContent:graph" INTEGER, "nmo:isFlagged" INTEGER, "nmo:isFlagged:graph" INTEGER, "nmo:isRecent" INTEGER, "nmo:isRecent:graph" INTEGER, "nmo:status" TEXT COLLATE TRACKER, "nmo:status:graph" INTEGER, "nmo:responseType" TEXT COLLATE TRACKER, "nmo:responseType:graph" INTEGER)
+
+  --> Found interesting column names in ncal:UnionParentClass (output limit 10)
+CREATE TABLE "ncal:UnionParentClass" (ID INTEGER NOT NULL PRIMARY KEY, "ncal:lastModified" INTEGER, "ncal:lastModified:graph" INTEGER, "ncal:lastModified:localDate" INTEGER, "ncal:lastModified:localTime" INTEGER, "ncal:trigger" INTEGER, "ncal:trigger:graph" INTEGER, "ncal:created" INTEGER, "ncal:created:graph" INTEGER, "ncal:created:localDate" INTEGER, "ncal:created:localTime" INTEGER, "ncal:url" INTEGER, "ncal:url:graph" INTEGER, "ncal:comment" TEXT COLLATE TRACKER, "ncal:comment:graph" INTEGER, "ncal:summaryAltRep" INTEGER, "ncal:summaryAltRep:graph" INTEGER, "ncal:priority" INTEGER, "ncal:priority:graph" INTEGER, "ncal:location" TEXT COLLATE TRACKER, "ncal:location:graph" INTEGER, "ncal:uid" TEXT COLLATE TRACKER, "ncal:uid:graph" INTEGER, "ncal:requestStatus" INTEGER, "ncal:requestStatus:graph" INTEGER, "ncal:recurrenceId" INTEGER, "ncal:recurrenceId:graph" INTEGER, "ncal:dtstamp" INTEGER, "ncal:dtstamp:graph" INTEGER, "ncal:dtstamp:localDate" INTEGER, "ncal:dtstamp:localTime" INTEGER, "ncal:class" INTEGER, "ncal:class:graph" INTEGER, "ncal:organizer" INTEGER, "ncal:organizer:graph" INTEGER, "ncal:dtend" INTEGER, "ncal:dtend:graph" INTEGER, "ncal:summary" TEXT COLLATE TRACKER, "ncal:summary:graph" INTEGER, "ncal:descriptionAltRep" INTEGER, "ncal:descriptionAltRep:graph" INTEGER, "ncal:commentAltRep" INTEGER, "ncal:commentAltRep:graph" INTEGER, "ncal:sequence" INTEGER, "ncal:sequence:graph" INTEGER, "ncal:contact" TEXT COLLATE TRACKER, "ncal:contact:graph" INTEGER, "ncal:contactAltRep" INTEGER, "ncal:contactAltRep:graph" INTEGER, "ncal:locationAltRep" INTEGER, "ncal:locationAltRep:graph" INTEGER, "ncal:geo" INTEGER, "ncal:geo:graph" INTEGER, "ncal:resourcesAltRep" INTEGER, "ncal:resourcesAltRep:graph" INTEGER, "ncal:dtstart" INTEGER, "ncal:dtstart:graph" INTEGER, "ncal:description" TEXT COLLATE TRACKER, "ncal:description:graph" INTEGER, "ncal:relatedToSibling" TEXT COLLATE TRACKER, "ncal:relatedToSibling:graph" INTEGER, "ncal:duration" INTEGER, "ncal:duration:graph" INTEGER)
+
+  --> Found interesting column names in fts5 (output limit 10)
+CREATE VIRTUAL TABLE fts5 USING fts5(content="fts_view", "nco:phoneNumber", "nfo:fontFamily", "nmm:artistName", "nfo:tableOfContents", "nfo:fileName", "nmo:messageSubject", "nfo:genre", "nmm:genre", "mtp:creator", "nco:title", "nco:emailAddress", "nie:keyword", "nmm:category", "nid3:title", "nid3:albumTitle", "nid3:contentType", "nco:nameFamily", "nco:nameGiven", "nco:nameAdditional", "nco:contactGroupName", "nco:fullname", "nco:nickname", "nco:region", "nco:country", "nco:extendedAddress", "nco:streetAddress", "nco:postalcode", "nco:locality", "nco:county", "nco:district", "nco:pobox", "nco:imID", "nco:imNickname", "ncal:comment", "ncal:location", "ncal:summary", "ncal:contact", "ncal:description", "nie:title", "nie:subject", "nie:plainTextContent", "nie:description", "nie:comment", "nao:prefLabel", "nao:description", "nco:department", "nco:role", "nco:note", "nmm:albumTitle", tokenize=TrackerTokenizer)
+
+ -> Extracting tables from /home/usuario/Calibre Library/metadata.db (limit 20)
+ -> Extracting tables from /home/usuario/.local/share/evolution/addressbook/system/contacts.db (limit 20)
+  --> Found interesting column names in folder_id_email_list (output limit 10)
+CREATE TABLE 'folder_id_email_list' (uid TEXT NOT NULL REFERENCES 'folder_id' (uid), value TEXT)
+
+ -> Extracting tables from /home/usuario/.local/share/zeitgeist/activity.sqlite (limit 20)
+ -> Extracting tables from /home/usuario/.mozilla/firefox/3udceohk.default-release/cert9.db (limit 20)
+ -> Extracting tables from /home/usuario/.mozilla/firefox/3udceohk.default-release/content-prefs.sqlite (limit 20)
+ -> Extracting tables from /home/usuario/.mozilla/firefox/3udceohk.default-release/cookies.sqlite (limit 20)
+ -> Extracting tables from /home/usuario/.mozilla/firefox/3udceohk.default-release/favicons.sqlite (limit 20)
+  --> Found interesting column names in moz_icons (output limit 10)
+CREATE TABLE moz_icons ( id INTEGER PRIMARY KEY, icon_url TEXT NOT NULL, fixed_icon_url_hash INTEGER NOT NULL, width INTEGER NOT NULL DEFAULT 0, root INTEGER NOT NULL DEFAULT 0, color INTEGER, expire_ms INTEGER NOT NULL DEFAULT 0, data BLOB )
+1, fake-favicon-uri:https://support.mozilla.org/products/firefox, 136573370287311, 32, 0, None, 1666860524197, �PNG
+�
+IHDR szz�cIDATx���kI�����:'I���s9�}�al�����m��ضm�r<��8U�~��X{��)4�ɮ�Vx/˗��:h�XT��=yO�
+�Z�|[�V<�k��
+            ��ރGy]�Coƴ'�B#Z�$�uk���O��uoĴ'�B�|�8����Eu)�+*^�y�Mnz���sQ
+                                                                       *E���ui���!P��M��.���V��1�ڼXo���F<[� ^�3������]-�JҶԁf��S��u1�3�	�=���JL�f醧R�_p%Q2&q�/�B�E���ǹK�IQ�G�)���L3���E"{*���@�A��(Ե#ي�������<�37���K�������>˼�Ob��
+Z����㋊���Τ���5H��o��w��[
+                         �08���@���<��fs������>F�h����IA���~�3^.�!����=�B)3�r��w�E�U1�b�Tu�d^|hKV��q�����
+A�dDܦ��\�݁��bA�8
+               W
+�1av�������?v<��Xe�#�Qg�o��$TzV��@I=޸�(pZ��� �Tw
+                                                �2Ye�ք������v?e�Y�2������b�����_����g���Np=8e;,TN��.�����
+�VkB&���tδ<���ʑ��d�-�d�7#pI�R<�X�m�$]�z!�Y����kf*�V�"-�
+                                                       ,삍8�*#�!�d�s�u���� M1xHW��
+                                                                                  �c���
+                                                                                       ��w�H,�mX6k˙��~�W��N��ªl��$�@yn{��X�xOb7������`�a�p�8wCh�`T�`҄z� PEb�hyQ��,�Z��h2�:�4�U��A25�!Ē��M!��SP���ЈT
+                                            �4!q���( �;S�{�Paw�� �l��������*�<�4@�i�=d]J�F�����@j�l�9A:���0��������h�Q0�9�
+V[�)20hu                                                                                                                  9���ԓ*��L-.�2դ�6N#�E
+        p�
+eH�
+�bi��\E��
+}r���'�����i�W�GUͰ���o��'�O�A��� e�j��V&��l6�1N��,X��!	Vl��П�d�@�ڨ[\��Q�@�0��F#{[��؅����}�J>� ���+�r��6�i�ج�h6J�5�)f��(�f�/�u$[��(p=9
+                                                      �	i
+                                                         U���K��_��0�_��[��)X<����%�5s�&�'�"�W:vY�AVO�(�
+
+  --> Found interesting column names in moz_pages_w_icons (output limit 10)
+CREATE TABLE moz_pages_w_icons ( id INTEGER PRIMARY KEY, page_url TEXT NOT NULL, page_url_hash INTEGER NOT NULL )
+1, https://support.mozilla.org/products/firefox, 47358327123126
+
+ -> Extracting tables from /home/usuario/.mozilla/firefox/3udceohk.default-release/formhistory.sqlite (limit 20)
+ -> Extracting tables from /home/usuario/.mozilla/firefox/3udceohk.default-release/key4.db (limit 20)
+ -> Extracting tables from /home/usuario/.mozilla/firefox/3udceohk.default-release/permissions.sqlite (limit 20)
+ -> Extracting tables from /home/usuario/.mozilla/firefox/3udceohk.default-release/places.sqlite (limit 20)
+  --> Found interesting column names in moz_places (output limit 10)
+CREATE TABLE moz_places (   id INTEGER PRIMARY KEY, url LONGVARCHAR, title LONGVARCHAR, rev_host LONGVARCHAR, visit_count INTEGER DEFAULT 0, hidden INTEGER DEFAULT 0 NOT NULL, typed INTEGER DEFAULT 0 NOT NULL, frecency INTEGER DEFAULT -1 NOT NULL, last_visit_date INTEGER , guid TEXT, foreign_count INTEGER DEFAULT 0 NOT NULL, url_hash INTEGER DEFAULT 0 NOT NULL , description TEXT, preview_image_url TEXT, site_name TEXT, origin_id INTEGER REFERENCES moz_origins(id))
+1, https://www.mozilla.org/privacy/firefox/, None, gro.allizom.www., 1, 1, 0, 24, 1666255723319086, Ttx59vpjK8WA, 0, 47356411089529, None, None, None, 1
+
+  --> Found interesting column names in moz_previews_tombstones (output limit 10)
+CREATE TABLE moz_previews_tombstones (   hash TEXT PRIMARY KEY ) WITHOUT ROWID
+
+ -> Extracting tables from /home/usuario/.mozilla/firefox/3udceohk.default-release/protections.sqlite (limit 20)
+ -> Extracting tables from /home/usuario/.mozilla/firefox/3udceohk.default-release/storage/default/https+++book.hacktricks.xyz/idb/2076414780cearcohtes-efri.sqlite (limit 20)
+ -> Extracting tables from /home/usuario/.mozilla/firefox/3udceohk.default-release/storage/default/https+++book.hacktricks.xyz/idb/3547115956fbiDreegbaarsoetLSolc.sqlite (limit 20)
+ -> Extracting tables from /home/usuario/.mozilla/firefox/3udceohk.default-release/storage/default/https+++book.hacktricks.xyz/idb/3713173747_s_edmban.sqlite (limit 20)
+ -> Extracting tables from /home/usuario/.mozilla/firefox/3udceohk.default-release/storage/default/https+++book.hacktricks.xyz/ls/data.sqlite (limit 20)
+ -> Extracting tables from /home/usuario/.mozilla/firefox/3udceohk.default-release/storage/default/https+++github.com/ls/data.sqlite (limit 20)
+ -> Extracting tables from /home/usuario/.mozilla/firefox/3udceohk.default-release/storage/default/https+++justbeamit.com/ls/data.sqlite (limit 20)
+ -> Extracting tables from /home/usuario/.mozilla/firefox/3udceohk.default-release/storage/default/https+++www.google.com/ls/data.sqlite (limit 20)
+ -> Extracting tables from /home/usuario/.mozilla/firefox/3udceohk.default-release/storage/ls-archive.sqlite (limit 20)
+ -> Extracting tables from /home/usuario/.mozilla/firefox/3udceohk.default-release/storage/permanent/chrome/idb/1451318868ntouromlalnodry--epcr.sqlite (limit 20)
+ -> Extracting tables from /home/usuario/.mozilla/firefox/3udceohk.default-release/storage/permanent/chrome/idb/1657114595AmcateirvtiSty.sqlite (limit 20)
+ -> Extracting tables from /home/usuario/.mozilla/firefox/3udceohk.default-release/storage/permanent/chrome/idb/2823318777ntouromlalnodry--naod.sqlite (limit 20)
+ -> Extracting tables from /home/usuario/.mozilla/firefox/3udceohk.default-release/storage/permanent/chrome/idb/2918063365piupsah.sqlite (limit 20)
+ -> Extracting tables from /home/usuario/.mozilla/firefox/3udceohk.default-release/storage/permanent/chrome/idb/3561288849sdhlie.sqlite (limit 20)
+ -> Extracting tables from /home/usuario/.mozilla/firefox/3udceohk.default-release/storage/permanent/chrome/idb/3870112724rsegmnoittet-es.sqlite (limit 20)
+ -> Extracting tables from /home/usuario/.mozilla/firefox/3udceohk.default-release/storage.sqlite (limit 20)
+ -> Extracting tables from /home/usuario/.mozilla/firefox/3udceohk.default-release/webappsstore.sqlite (limit 20)
+ -> Extracting tables from /var/lib/colord/mapping.db (limit 20)
+ -> Extracting tables from /var/lib/colord/storage.db (limit 20)
+ -> Extracting tables from /var/lib/PackageKit/transactions.db (limit 20)
+
+╔══════════╣ Web files?(output limit)
+
+╔══════════╣ All hidden files (not in /sys/ or the ones listed in the previous check) (limit 70)
+-rw-r--r-- 1 root root 64 oct 20 09:40 /usr/lib/jvm/java-8-oracle/lib/missioncontrol/.eclipseproduct
+-rw-r--r-- 1 root root 0 oct 20 09:40 /usr/lib/jvm/java-8-oracle/lib/visualvm/visualvm/.lastModified
+-rw-r--r-- 1 root root 0 oct 20 09:40 /usr/lib/jvm/java-8-oracle/lib/visualvm/platform/.lastModified
+-rw-r--r-- 1 root root 3559 oct 20 09:40 /usr/lib/jvm/.java-14-oracle.jinfo
+-rw-r--r-- 1 root root 2643 oct 20 09:40 /usr/lib/jvm/.java-8-oracle.jinfo
+-rw-r--r-- 1 root root 0 abr 10  2020 /usr/lib/python3/dist-packages/PyQt5/uic/widget-plugins/.noinit
+-rw-r--r-- 1 root root 7 abr  9  2020 /usr/share/geogebra/resources/app/node_modules/ffi-napi/build/Release/.forge-meta
+-rw-r--r-- 1 root root 295 abr  9  2020 /usr/share/geogebra/resources/app/node_modules/ffi-napi/.travis.yml
+-rw-r--r-- 1 root root 108 abr  9  2020 /usr/share/geogebra/resources/app/node_modules/ffi-napi/.jshintrc
+-rw-r--r-- 1 root root 46 abr  9  2020 /usr/share/geogebra/resources/app/node_modules/debug/.coveralls.yml
+-rw-r--r-- 1 root root 140 abr  9  2020 /usr/share/geogebra/resources/app/node_modules/debug/.travis.yml
+-rw-r--r-- 1 root root 180 abr  9  2020 /usr/share/geogebra/resources/app/node_modules/debug/.eslintrc
+-rw-r--r-- 1 root root 7 abr  9  2020 /usr/share/geogebra/resources/app/node_modules/ref-napi/build/Release/.forge-meta
+-rw-r--r-- 1 root root 1623 abr  9  2020 /usr/share/geogebra/resources/app/node_modules/ref-napi/node_modules/node-addon-api/.travis.yml
+-rw-r--r-- 1 root root 130 abr  9  2020 /usr/share/geogebra/resources/app/node_modules/ref-napi/node_modules/node-addon-api/.editorconfig
+-rw-r--r-- 1 root root 295 abr  9  2020 /usr/share/geogebra/resources/app/node_modules/ref-napi/.travis.yml
+-rw-r--r-- 1 root root 116 abr  9  2020 /usr/share/geogebra/resources/app/node_modules/mkdirp/.travis.yml
+-rw-r--r-- 1 root root 472 abr  9  2020 /usr/share/geogebra/resources/app/node_modules/file-uri-to-path/.travis.yml
+-rw-r--r-- 1 root root 0 nov 15  2018 /usr/share/dictionaries-common/site-elisp/.nosearch
+-rwxr-xr-x 1 root root 10 abr  8  2020 /usr/share/carmetal/docs/images/palettes/.cvsignore
+-rwxr-xr-x 1 root root 10 abr  8  2020 /usr/share/carmetal/docs/images/.cvsignore
+-rwxr-xr-x 1 root root 10 abr  8  2020 /usr/share/carmetal/docs/.cvsignore
+-rw-r--r-- 1 root root 358 sep  4  2013 /usr/share/xml/docbook/stylesheet/docbook-xsl/slides/slidy/help/.htaccess
+-rw-r--r-- 1 root root 358 sep  4  2013 /usr/share/xml/docbook/stylesheet/docbook-xsl/slides/slidy/styles/.htaccess
+-rw-r--r-- 1 root root 358 sep  4  2013 /usr/share/xml/docbook/stylesheet/docbook-xsl/slides/slidy/scripts/.htaccess
+-rw-r--r-- 1 root root 358 sep  4  2013 /usr/share/xml/docbook/stylesheet/docbook-xsl/slides/slidy/.htaccess
+-rw-r--r-- 1 root root 0 oct 20 12:19 /run/network/.ifstate.lock
+-r--r--r-- 1 gdm gdm 11 oct 20 12:19 /tmp/.X1025-lock
+-r--r--r-- 1 gdm gdm 11 oct 20 12:19 /tmp/.X1024-lock
+-r--r--r-- 1 usuario usuario 3575 dic 22  2021 /media/usuario/ISOIMAGE/System/Library/CoreServices/.disk_label
+-r--r--r-- 1 usuario usuario 26 dic 22  2021 /media/usuario/ISOIMAGE/System/Library/CoreServices/.disk_label.contentDetails
+-rw-r--r-- 1 root root 220 jun 18  2020 /etc/skel/.bash_logout
+-rw------- 1 root root 0 oct 20 09:36 /etc/.pwd.lock
+-rw-r--r-- 1 root root 0 oct 20 09:40 /etc/.java/.systemPrefs/.systemRootModFile
+-rw-r--r-- 1 root root 0 oct 20 09:40 /etc/.java/.systemPrefs/.system.lock
+-rw-r--r-- 1 usuario usuario 220 oct 20 09:49 /home/usuario/.bash_logout
+
+╔══════════╣ Readable files inside /tmp, /var/tmp, /private/tmp, /private/var/at/tmp, /private/var/tmp, and backup folders (limit 70)
+-r--r--r-- 1 gdm gdm 11 oct 20 12:19 /tmp/.X1025-lock
+-r--r--r-- 1 gdm gdm 11 oct 20 12:19 /tmp/.X1024-lock
+-rw------- 1 usuario usuario 0 oct 20 12:19 /tmp/config-err-aKPKG8
+-rw-r--r-- 1 root root 4571 oct 20 09:44 /var/tmp/AUTOFIRMA_CONFIGURATOR.afirma.log.xml
+
+╔══════════╣ Interesting writable files owned by me or writable by everyone (not in Home) (max 500)
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#writable-files
+/dev/mqueue
+/dev/shm
+/etc/firefox/pref/AutoFirmaJA.js
+/etc/firefox/pref/AutoFirma.js
+/home/usuario
+/media/usuario/ISOIMAGE
+/media/usuario/ISOIMAGE/boot
+/media/usuario/ISOIMAGE/boot.catalog
+/media/usuario/ISOIMAGE/bootefi
+/media/usuario/ISOIMAGE/bootefi/grub
+/media/usuario/ISOIMAGE/bootefi/grub/grub.cfg
+/media/usuario/ISOIMAGE/bootefi/grub/locale
+/media/usuario/ISOIMAGE/bootefi/grub/locale/en_AU.mo
+/media/usuario/ISOIMAGE/bootefi/grub/locale/en_CA.mo
+/media/usuario/ISOIMAGE/bootefi/grub/locale/en_GB.mo
+/media/usuario/ISOIMAGE/bootefi/grub/locale/es.mo
+/media/usuario/ISOIMAGE/bootefi/grub/locale/fr.mo
+/media/usuario/ISOIMAGE/bootefi/grub/unicode.pf2
+/media/usuario/ISOIMAGE/bootefi/initrd.gz
+/media/usuario/ISOIMAGE/bootefi/linux
+/media/usuario/ISOIMAGE/boot/grub
+/media/usuario/ISOIMAGE/boot/grub/fonts
+/media/usuario/ISOIMAGE/boot/grub/fonts/unicode.pf2
+/media/usuario/ISOIMAGE/boot/grub/grub.cfg
+/media/usuario/ISOIMAGE/boot/grub/i386-pc
+/media/usuario/ISOIMAGE/boot/grub/i386-pc/915resolution.mod
+/media/usuario/ISOIMAGE/boot/grub/i386-pc/acpi.mod
+/media/usuario/ISOIMAGE/boot/grub/i386-pc/adler32.mod
+/media/usuario/ISOIMAGE/boot/grub/i386-pc/affs.mod
+/media/usuario/ISOIMAGE/boot/grub/i386-pc/afs.mod
+#)You_can_write_even_more_files_inside_last_directory
+
+/media/usuario/ISOIMAGE/boot/grub/locale
+/media/usuario/ISOIMAGE/boot/grub/locale/en_AU.mo
+/media/usuario/ISOIMAGE/boot/grub/locale/en_CA.mo
+/media/usuario/ISOIMAGE/boot/grub/locale/en_GB.mo
+/media/usuario/ISOIMAGE/boot/grub/locale/es.mo
+/media/usuario/ISOIMAGE/boot/grub/locale/fr.mo
+/media/usuario/ISOIMAGE/boot/grub/roms
+/media/usuario/ISOIMAGE/boot/grub/unicode.pf2
+/media/usuario/ISOIMAGE/boot/grub/x86_64-efi
+/media/usuario/ISOIMAGE/boot/grub/x86_64-efi/acpi.mod
+/media/usuario/ISOIMAGE/boot/grub/x86_64-efi/adler32.mod
+/media/usuario/ISOIMAGE/boot/grub/x86_64-efi/affs.mod
+/media/usuario/ISOIMAGE/boot/grub/x86_64-efi/afs.mod
+/media/usuario/ISOIMAGE/boot/grub/x86_64-efi/ahci.mod
+#)You_can_write_even_more_files_inside_last_directory
+
+/media/usuario/ISOIMAGE/boot/initrd.gz
+/media/usuario/ISOIMAGE/boot/linux
+/media/usuario/ISOIMAGE/efi.img
+/media/usuario/ISOIMAGE/hybrid
+/media/usuario/ISOIMAGE/mach_kernel
+/media/usuario/ISOIMAGE/repositorio.iso
+/media/usuario/ISOIMAGE/System
+/media/usuario/ISOIMAGE/System/Library
+/media/usuario/ISOIMAGE/System/Library/CoreServices
+/media/usuario/ISOIMAGE/System/Library/CoreServices/boot.efi
+/media/usuario/ISOIMAGE/System/Library/CoreServices/.disk_label
+/media/usuario/ISOIMAGE/System/Library/CoreServices/.disk_label.contentDetails
+/media/usuario/ISOIMAGE/System/Library/CoreServices/SystemVersion.plist
+/media/usuario/ISOIMAGE/version
+/run/lock
+/run/screen
+/run/user/1000
+/run/user/1000/dbus-1
+/run/user/1000/dbus-1/services
+/run/user/1000/dconf
+/run/user/1000/dconf/user
+/run/user/1000/doc
+/run/user/1000/doc/by-app
+/run/user/1000/gdm
+/run/user/1000/gdm/Xauthority
+/run/user/1000/gnome-shell
+/run/user/1000/gnome-shell/runtime-state-LE.:0
+/run/user/1000/gnupg
+/run/user/1000/gvfs
+/run/user/1000/ICEauthority
+/run/user/1000/inaccessible
+/run/user/1000/keyring
+#)You_can_write_even_more_files_inside_last_directory
+
+/run/user/1000/pulse/pid
+/run/user/1000/systemd
+/run/user/1000/systemd/transient
+/run/user/1000/systemd/transient/vte-spawn-fefa95d6-0741-472c-bfcc-2260e804c735.scope
+/run/user/1000/systemd/units
+/run/user/1000/update-notifier.pid
+/tmp
+/tmp/config-err-aKPKG8
+/tmp/.font-unix
+/tmp/hsperfdata_usuario
+/tmp/.ICE-unix
+/tmp/ssh-XgRE22pWeScC
+#)You_can_write_even_more_files_inside_last_directory
+
+/usr/bin/AutoFirma
+/usr/bin/AutoFirmaJA
+/usr/bin/AutoFirmaJA-FirefoxChrome
+/usr/lib/AutoFirma
+/usr/lib/AutoFirma/AutoFirmaConfigurador.jar
+/usr/lib/AutoFirma/AutoFirma.jar
+/usr/lib/AutoFirmaJA
+/usr/lib/AutoFirmaJA/AutoFirmaJA.jar
+/usr/lib/x86_64-linux-gnu/libdvdcss.so.2.2.0
+/usr/local/jclic/sound_jclicplayer
+/usr/share/applications/afirma.desktop
+/usr/share/applications/afirmaja.desktop
+/usr/share/applications/afirmaja-firefoxchrome.desktop
+/usr/share/AutoFirma
+/usr/share/AutoFirmaJA
+/usr/share/AutoFirmaJA/extensions.txt
+/usr/share/AutoFirmaJA/index.txt.old
+/usr/share/AutoFirmaJA/openssl.cnf
+/usr/share/AutoFirmaJA/openssl.cnf_original
+/usr/share/AutoFirmaJA/serial.txt.old
+/usr/share/cga-physical-etoys-2.0
+/usr/share/cga-physical-etoys-2.0/contents
+/usr/share/cga-physical-etoys-2.0/contents/Arduino
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/cores
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/cores/arduino
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/cores/arduino nuevo
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/cores/arduino nuevo/binary.h
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/cores/arduino nuevo/HardwareSerial.cpp
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/cores/arduino nuevo/HardwareSerial.d
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/cores/arduino nuevo/HardwareSerial.h
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/cores/arduino nuevo/main.cpp
+#)You_can_write_even_more_files_inside_last_directory
+
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/cores/arduino/binary.h
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/cores/arduino/.gitignore
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/cores/arduino/HardwareSerial.cpp
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/cores/arduino/HardwareSerial.d
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/cores/arduino/HardwareSerial.h
+#)You_can_write_even_more_files_inside_last_directory
+
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/libraries
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/libraries/CppFix
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/libraries/CppFix/CppFix.h
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/libraries/PhysicalEtoys
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/libraries/PhysicalEtoys/PhysicalEtoys.h
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/libraries/Servo
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/libraries/Servo/Servo.cpp
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/libraries/Servo/Servo.h
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr viejo
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr viejo/avr
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr viejo/avr/include
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr viejo/avr/include/alloca.h
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr viejo/avr/include/assert.h
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr viejo/avr/include/avr
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr viejo/avr/include/avr/boot.h
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr viejo/avr/include/avr/builtins.h
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr viejo/avr/include/avr/common.h
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr viejo/avr/include/avr/crc16.h
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr viejo/avr/include/avr/delay.h
+#)You_can_write_even_more_files_inside_last_directory
+
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr/avr
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr/avr/include
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr/avr/include/alloca.h
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr/avr/include/assert.h
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr/avr/include/avr
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr/avr/include/avr/boot.h
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr/avr/include/avr/builtins.h
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr/avr/include/avr/common.h
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr/avr/include/avr/crc16.h
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr/avr/include/avr/delay.h
+#)You_can_write_even_more_files_inside_last_directory
+
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr/avr/include/compat
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr/avr/include/compat/deprecated.h
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr/avr/include/compat/ina90.h
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr/avr/include/compat/twi.h
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr/avr/include/ctype.h
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr/avr/include/errno.h
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr/avr/include/inttypes.h
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr/avr/include/math.h
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr/avr/include/setjmp.h
+#)You_can_write_even_more_files_inside_last_directory
+
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr/avr/include/util/atomic.h
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr/avr/include/util/crc16.h
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr/avr/include/util/delay_basic.h
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr/avr/include/util/delay.h
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr/avr/include/util/parity.h
+#)You_can_write_even_more_files_inside_last_directory
+
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr/bin
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr/bin/avrdude
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr/bin/pythonserial.py
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr/etc
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr/etc/avrdude.conf
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/hardware/tools/avr/etc/avrdude.old
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/Sketches
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/Sketches/ArduinoDirectMode
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/Sketches/ArduinoDirectMode/applet
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/Sketches/ArduinoDirectMode/applet/ArduinoDirectMode.cpp
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/Sketches/ArduinoDirectMode/applet/ArduinoDirectMode.elf
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/Sketches/ArduinoDirectMode/applet/ArduinoDirectMode.hex
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/Sketches/ArduinoDirectMode/ArduinoDirectMode.pde
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/Sketches/ArduinoDirectMode/err
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/Sketches/ArduinoDirectMode/finish
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/Sketches/ArduinoDirectMode/Makefile
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/Sketches/ArduinoDirectMode/out
+#)You_can_write_even_more_files_inside_last_directory
+
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/Sketches/.gitignore
+/usr/share/cga-physical-etoys-2.0/contents/Arduino/Sketches/upload.sh
+/usr/share/cga-physical-etoys-2.0/contents/DuinoBotFirmware6
+/usr/share/cga-physical-etoys-2.0/contents/DuinoBotFirmware6/DuinoBotFirmware6.pde
+/usr/share/cga-physical-etoys-2.0/contents/DuinoBotFirmware6/MotorDC.h
+/usr/share/cga-physical-etoys-2.0/contents/DuinoBotFirmware6/QueueArray.h
+/usr/share/cga-physical-etoys-2.0/contents/Etoys-Home.001.pr
+/usr/share/cga-physical-etoys-2.0/contents/EtoysV5.stc
+/usr/share/cga-physical-etoys-2.0/contents/ExampleEtoys
+/usr/share/cga-physical-etoys-2.0/contents/ExampleEtoys/AgeComparison.005.pr
+/usr/share/cga-physical-etoys-2.0/contents/ExampleEtoys/BallDropAnalysis1.018.pr
+/usr/share/cga-physical-etoys-2.0/contents/ExampleEtoys/BetterMovieUI.013.pr
+/usr/share/cga-physical-etoys-2.0/contents/ExampleEtoys/BouncingBallAnimation.012.pr
+/usr/share/cga-physical-etoys-2.0/contents/ExampleEtoys/CarAndPen.014.pr
+#)You_can_write_even_more_files_inside_last_directory
+
+/usr/share/cga-physical-etoys-2.0/contents/Gallery.031.pr
+/usr/share/cga-physical-etoys-2.0/contents/Home.007.pr
+/usr/share/cga-physical-etoys-2.0/contents/locale
+/usr/share/cga-physical-etoys-2.0/contents/locale/en
+/usr/share/cga-physical-etoys-2.0/contents/locale/en/LC_MESSAGES
+/usr/share/cga-physical-etoys-2.0/contents/locale/en/LC_MESSAGES/BroomMorphs.mo
+/usr/share/cga-physical-etoys-2.0/contents/locale/en/LC_MESSAGES/Collections.mo
+/usr/share/cga-physical-etoys-2.0/contents/locale/en/LC_MESSAGES/Compression.mo
+/usr/share/cga-physical-etoys-2.0/contents/locale/en/LC_MESSAGES/Connectors.mo
+/usr/share/cga-physical-etoys-2.0/contents/locale/en/LC_MESSAGES/DAVServerDirectory.mo
+#)You_can_write_even_more_files_inside_last_directory
+
+/usr/share/cga-physical-etoys-2.0/contents/locale/en/pe.strings
+/usr/share/cga-physical-etoys-2.0/contents/locale/en/QuickGuides
+/usr/share/cga-physical-etoys-2.0/contents/locale/en/QuickGuides/BooksExpandedControls.sexp.data.gz
+/usr/share/cga-physical-etoys-2.0/contents/locale/en/QuickGuides/BooksNavigationTiles.sexp.data.gz
+/usr/share/cga-physical-etoys-2.0/contents/locale/en/QuickGuides/BooksTopBorderIcons.sexp.data.gz
+/usr/share/cga-physical-etoys-2.0/contents/locale/en/QuickGuides/BooksWorking-withLayers.sexp.data.gz
+/usr/share/cga-physical-etoys-2.0/contents/locale/en/QuickGuides/HaloArrow-atCenter.sexp.data.gz
+#)You_can_write_even_more_files_inside_last_directory
+
+/usr/share/cga-physical-etoys-2.0/contents/locale/es
+/usr/share/cga-physical-etoys-2.0/contents/locale/es/LC_MESSAGES
+/usr/share/cga-physical-etoys-2.0/contents/locale/es/LC_MESSAGES/BroomMorphs.mo
+/usr/share/cga-physical-etoys-2.0/contents/locale/es/LC_MESSAGES/Collections.mo
+/usr/share/cga-physical-etoys-2.0/contents/locale/es/LC_MESSAGES/Compression.mo
+/usr/share/cga-physical-etoys-2.0/contents/locale/es/LC_MESSAGES/Connectors.mo
+/usr/share/cga-physical-etoys-2.0/contents/locale/es/LC_MESSAGES/DAVServerDirectory.mo
+#)You_can_write_even_more_files_inside_last_directory
+
+/usr/share/cga-physical-etoys-2.0/contents/locale/es/pe.strings
+/usr/share/cga-physical-etoys-2.0/contents/locale/es/QuickGuides
+/usr/share/cga-physical-etoys-2.0/contents/locale/es/QuickGuides/BooksCapas.sexp.data.gz
+/usr/share/cga-physical-etoys-2.0/contents/locale/es/QuickGuides/BooksControlesExpandidos.sexp.data.gz
+/usr/share/cga-physical-etoys-2.0/contents/locale/es/QuickGuides/BooksIconosBordeSuperior.sexp.data.gz
+/usr/share/cga-physical-etoys-2.0/contents/locale/es/QuickGuides/BooksMosaicosNavegacion.sexp.data.gz
+/usr/share/cga-physical-etoys-2.0/contents/locale/es/QuickGuides/HaloBasura.sexp.data.gz
+#)You_can_write_even_more_files_inside_last_directory
+
+/usr/share/cga-physical-etoys-2.0/contents/locale/fr
+/usr/share/cga-physical-etoys-2.0/contents/locale/fr/LC_MESSAGES
+/usr/share/cga-physical-etoys-2.0/contents/locale/fr/LC_MESSAGES/BroomMorphs.mo
+/usr/share/cga-physical-etoys-2.0/contents/locale/fr/LC_MESSAGES/Collections.mo
+/usr/share/cga-physical-etoys-2.0/contents/locale/fr/LC_MESSAGES/Compression.mo
+/usr/share/cga-physical-etoys-2.0/contents/locale/fr/LC_MESSAGES/Connectors.mo
+/usr/share/cga-physical-etoys-2.0/contents/locale/fr/LC_MESSAGES/DAVServerDirectory.mo
+#)You_can_write_even_more_files_inside_last_directory
+
+/usr/share/cga-physical-etoys-2.0/contents/locale/fr/QuickGuides
+/usr/share/cga-physical-etoys-2.0/contents/locale/fr/QuickGuides/HaloAfficher-leHalo.sexp.data.gz
+/usr/share/cga-physical-etoys-2.0/contents/locale/fr/QuickGuides/HaloCentre-deRotation.sexp.data.gz
+/usr/share/cga-physical-etoys-2.0/contents/locale/fr/QuickGuides/HaloCouleur.sexp.data.gz
+/usr/share/cga-physical-etoys-2.0/contents/locale/fr/QuickGuides/HaloDeplacerPrendre.sexp.data.gz
+/usr/share/cga-physical-etoys-2.0/contents/locale/fr/QuickGuides/HaloFleche-au-centre.sexp.data.gz
+#)You_can_write_even_more_files_inside_last_directory
+
+/usr/share/cga-physical-etoys-2.0/contents/locale/pt
+/usr/share/cga-physical-etoys-2.0/contents/locale/pt_BR
+/usr/share/cga-physical-etoys-2.0/contents/locale/pt_BR/LC_MESSAGES
+/usr/share/cga-physical-etoys-2.0/contents/locale/pt_BR/LC_MESSAGES/BroomMorphs.mo
+/usr/share/cga-physical-etoys-2.0/contents/locale/pt_BR/LC_MESSAGES/Collections.mo
+/usr/share/cga-physical-etoys-2.0/contents/locale/pt_BR/LC_MESSAGES/Compression.mo
+/usr/share/cga-physical-etoys-2.0/contents/locale/pt_BR/LC_MESSAGES/Connectors.mo
+/usr/share/cga-physical-etoys-2.0/contents/locale/pt_BR/LC_MESSAGES/DAVServerDirectory.mo
+#)You_can_write_even_more_files_inside_last_directory
+
+/usr/share/cga-physical-etoys-2.0/contents/locale/pt/LC_MESSAGES
+/usr/share/cga-physical-etoys-2.0/contents/locale/pt/LC_MESSAGES/BroomMorphs.mo
+/usr/share/cga-physical-etoys-2.0/contents/locale/pt/LC_MESSAGES/Collections.mo
+/usr/share/cga-physical-etoys-2.0/contents/locale/pt/LC_MESSAGES/Compression.mo
+/usr/share/cga-physical-etoys-2.0/contents/locale/pt/LC_MESSAGES/Connectors.mo
+/usr/share/cga-physical-etoys-2.0/contents/locale/pt/LC_MESSAGES/DAVServerDirectory.mo
+#)You_can_write_even_more_files_inside_last_directory
+
+/usr/share/cga-physical-etoys-2.0/contents/locale/pt/QuickGuides
+/usr/share/cga-physical-etoys-2.0/contents/locale/pt/QuickGuides/AcessGravador-deSom.sexp.data.gz
+/usr/share/cga-physical-etoys-2.0/contents/locale/pt/QuickGuides/AcessoriosCatObjectos.sexp.data.gz
+/usr/share/cga-physical-etoys-2.0/contents/locale/pt/QuickGuides/AcessoriosJoystick.sexp.data.gz
+/usr/share/cga-physical-etoys-2.0/contents/locale/pt/QuickGuides/AcessoriosTexto.sexp.data.gz
+/usr/share/cga-physical-etoys-2.0/contents/locale/pt/QuickGuides/AcessTodos-osScripts.sexp.data.gz
+#)You_can_write_even_more_files_inside_last_directory
+
+/usr/share/cga-physical-etoys-2.0/contents/MIT-License.txt
+/usr/share/cga-physical-etoys-2.0/contents/nbc
+/usr/share/cga-physical-etoys-2.0/contents/nbc-readme
+/usr/share/cga-physical-etoys-2.0/contents/package-cache
+/usr/share/cga-physical-etoys-2.0/contents/pe.changes
+#)You_can_write_even_more_files_inside_last_directory
+
+/usr/share/cga-physical-etoys-2.0/contents/secure/Squeak.keys
+/usr/share/cga-physical-etoys-2.0/contents/Sin nombre.001.pe
+/usr/share/cga-physical-etoys-2.0/contents/SqueakDebug.log
+/usr/share/cga-physical-etoys-2.0/contents/Squeaklets
+/usr/share/cga-physical-etoys-2.0/contents/Squeaklets/Etoys-Home.001.pr
+/usr/share/cga-physical-etoys-2.0/contents/Tutorials.015.pr
+/usr/share/cga-physical-etoys-2.0/PhysicalEtoys.sh
+/usr/share/cga-physical-etoys-2.0/vm
+/usr/share/cga-physical-etoys-2.0/vm/ckformat
+/usr/share/cga-physical-etoys-2.0/vm/Info.plist
+/usr/share/cga-physical-etoys-2.0/vm/PkgInfo
+/usr/share/cga-physical-etoys-2.0/vm/so.AioPlugin
+/usr/share/cga-physical-etoys-2.0/vm/so.B3DAcceleratorPlugin
+#)You_can_write_even_more_files_inside_last_directory
+
+/usr/share/common-licenses/eupl-1.1.txt
+/usr/share/common-licenses/gpl-2.0.txt
+/usr/share/doc/AutoFirma
+/usr/share/doc/AutoFirma/copyright
+/usr/share/doc/AutoFirma/EUPL-1.1.gz
+/usr/share/doc/AutoFirma/GPL-2.0.gz
+/usr/share/doc/AutoFirmaJA
+/usr/share/doc/AutoFirmaJA/copyright
+/usr/share/doc/libdvdcss2
+/usr/share/doc/libdvdcss2/AUTHORS
+/usr/share/doc/libdvdcss2/changelog.Debian.gz
+/usr/share/doc/libdvdcss2/changelog.gz
+/usr/share/doc/libdvdcss2/copyright
+/usr/share/doc/libdvdcss2/README
+/usr/share/doc/linux-generic
+/usr/share/doc/linux-generic/copyright
+/usr/share/doc/linux-headers-generic
+/usr/share/doc/linux-headers-generic/changelog.gz
+/usr/share/doc/linux-headers-generic/copyright
+/usr/share/doc/linux-image-generic
+/usr/share/doc/linux-image-generic/changelog.gz
+/usr/share/doc/linux-image-generic/copyright
+/usr/share/jclic
+/usr/share/jclic/clientes_jclic_sigala.txt
+/usr/share/jclic/clientes_jclic.txt
+/usr/share/nemo
+/usr/share/nemo/actions
+/usr/share/nemo/actions/afirmaja.nemo_action
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/LGPL
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/LGPL/LGPL.txt
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/LGPL/notice.txt
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/libflashplayer.so
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/libpepflashplayer.so
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/manifest.json
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/readme.txt
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/bin
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/bin/flash-player-properties
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/lib
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/lib64
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/lib64/kde4
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/lib64/kde4/kcm_adobe_flash_player.so
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/lib/kde4
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/share
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/share/applications
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/share/applications/flash-player-properties.desktop
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/share/icons
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/share/icons/hicolor
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/share/icons/hicolor/16x16
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/share/icons/hicolor/16x16/apps
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/share/icons/hicolor/22x22
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/share/icons/hicolor/22x22/apps
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/share/icons/hicolor/24x24
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/share/icons/hicolor/24x24/apps
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/share/icons/hicolor/32x32
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/share/icons/hicolor/32x32/apps
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/share/icons/hicolor/48x48
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/share/icons/hicolor/48x48/apps
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/share/kde4
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/share/kde4/services
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/share/kde4/services/kcm_adobe_flash_player.desktop
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/share/pixmaps
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/LGPL
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/LGPL/LGPL.txt
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/LGPL/notice.txt
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/libflashplayer.so
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/libpepflashplayer.so
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/manifest.json
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/readme.txt
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/bin
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/bin/flash-player-properties
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/lib
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/lib/kde4
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/lib/kde4/kcm_adobe_flash_player.so
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/share
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/share/applications
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/share/applications/flash-player-properties.desktop
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/share/icons
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/share/icons/hicolor
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/share/icons/hicolor/16x16
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/share/icons/hicolor/16x16/apps
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/share/icons/hicolor/22x22
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/share/icons/hicolor/22x22/apps
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/share/icons/hicolor/24x24
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/share/icons/hicolor/24x24/apps
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/share/icons/hicolor/32x32
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/share/icons/hicolor/32x32/apps
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/share/icons/hicolor/48x48
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/share/icons/hicolor/48x48/apps
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/share/kde4
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/share/kde4/services
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/share/kde4/services/kcm_adobe_flash_player.desktop
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/share/pixmaps
+/var/crash
+/var/crash/_usr_bin_software-properties-gtk.1000.crash
+/var/lib/BrlAPI
+/var/log/cga-update-manager
+/var/log/cga-update-manager/cga-updater.log
+/var/metrics
+/var/spool/cups-pdf/ANONYMOUS
+/var/tmp
+
+╔══════════╣ Interesting GROUP writable files (not in Home) (max 500)
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#writable-files
+  Group usuario:
+/usr/lib/AutoFirma
+/usr/lib/AutoFirma/AutoFirmaConfigurador.jar
+/usr/lib/AutoFirma/AutoFirma.jar
+/usr/lib/AutoFirmaJA/AutoFirmaJA.jar
+/usr/share/applications/afirma.desktop
+/usr/share/AutoFirma
+/usr/share/common-licenses/eupl-1.1.txt
+/usr/share/common-licenses/gpl-2.0.txt
+/usr/share/doc/AutoFirma
+/usr/share/doc/AutoFirma/EUPL-1.1.gz
+/usr/share/doc/AutoFirma/GPL-2.0.gz
+/usr/share/doc/AutoFirma/copyright
+/usr/bin/AutoFirma
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/lib
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/lib/kde4
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/share
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/share/applications
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/share/applications/flash-player-properties.desktop
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/share/icons
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/share/icons/hicolor
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/share/icons/hicolor/32x32
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/share/icons/hicolor/32x32/apps
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/share/icons/hicolor/16x16
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/share/icons/hicolor/16x16/apps
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/share/icons/hicolor/22x22
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/share/icons/hicolor/22x22/apps
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/share/icons/hicolor/48x48
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/share/icons/hicolor/48x48/apps
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/share/icons/hicolor/24x24
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/share/icons/hicolor/24x24/apps
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/share/pixmaps
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/share/kde4
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/share/kde4/services
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/share/kde4/services/kcm_adobe_flash_player.desktop
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/usr/bin
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/libpepflashplayer.so
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/libflashplayer.so
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/manifest.json
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/LGPL
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/LGPL/notice.txt
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/LGPL/LGPL.txt
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/i386/readme.txt
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/lib
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/lib/kde4
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/lib64
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/lib64/kde4
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/share
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/share/applications
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/share/applications/flash-player-properties.desktop
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/share/icons
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/share/icons/hicolor
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/share/icons/hicolor/32x32
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/share/icons/hicolor/32x32/apps
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/share/icons/hicolor/16x16
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/share/icons/hicolor/16x16/apps
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/share/icons/hicolor/22x22
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/share/icons/hicolor/22x22/apps
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/share/icons/hicolor/48x48
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/share/icons/hicolor/48x48/apps
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/share/icons/hicolor/24x24
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/share/icons/hicolor/24x24/apps
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/share/pixmaps
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/share/kde4
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/share/kde4/services
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/share/kde4/services/kcm_adobe_flash_player.desktop
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/usr/bin
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/libpepflashplayer.so
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/libflashplayer.so
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/manifest.json
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/LGPL
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/LGPL/notice.txt
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/LGPL/LGPL.txt
+/var/cache/flashplugin-installer/adobe-flashplugin-20200714.1/amd64/readme.txt
+/etc/firefox/pref/AutoFirma.js
+  Group lpadmin:
+/usr/share/ppd/custom
+/var/spool/cups-pdf/ANONYMOUS
+
+╔══════════╣ Searching passwords in history files
+sudo su
+sudo -l
+https://github.com/evait-security/ClickNRoot/blob/master/1/exploit.c
+sudo -V | grep "Sudo ver" | grep "1\.[01234567]\.[0-9]\+\|1\.8\.1[0-9]\*\|1\.8\.2[01234567]"
+sudo -V
+grep -E "(user|username|login|pass|password|pw|credentials)[=:]" /etc/fstab /etc/mtab 2>/dev/null
+curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh
+curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh > reporte.txt
+curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh > reporte.txt
+Coincidencia en el archivo binario /usr/share/scilab/modules/optimization/macros/neldermead/nmplot_historyplot.bin
+
+╔══════════╣ Searching *password* or *credential* files in home (limit 70)
+/etc/brlapi.key
+/etc/pam.d/common-password
+/etc/pam.d/gdm-password
+/media/usuario/ISOIMAGE/boot/grub/i386-pc/legacy_password_test.mod
+/media/usuario/ISOIMAGE/boot/grub/i386-pc/password.mod
+/media/usuario/ISOIMAGE/boot/grub/i386-pc/password_pbkdf2.mod
+/media/usuario/ISOIMAGE/boot/grub/x86_64-efi/legacy_password_test.mod
+/media/usuario/ISOIMAGE/boot/grub/x86_64-efi/password.mod
+/media/usuario/ISOIMAGE/boot/grub/x86_64-efi/password_pbkdf2.mod
+/usr/bin/systemd-ask-password
+/usr/bin/systemd-tty-ask-password-agent
+/usr/lib/calibre/calibre/gui2/dialogs/password.py
+/usr/lib/calibre/calibre/gui2/dialogs/password_ui.py
+/usr/lib/calibre/calibre/gui2/dialogs/__pycache__/password.cpython-38.pyc
+/usr/lib/calibre/calibre/gui2/dialogs/__pycache__/password_ui.cpython-38.pyc
+/usr/lib/evolution-data-server/credential-modules
+/usr/lib/evolution-data-server/credential-modules/module-credentials-goa.so
+/usr/lib/grub/i386-pc/legacy_password_test.mod
+/usr/lib/grub/i386-pc/password.mod
+/usr/lib/grub/i386-pc/password_pbkdf2.mod
+/usr/lib/grub/x86_64-efi/legacy_password_test.mod
+/usr/lib/grub/x86_64-efi/password.mod
+/usr/lib/grub/x86_64-efi/password_pbkdf2.mod
+/usr/lib/jvm/java-14-oracle/conf/management/jmxremote.password.template
+/usr/lib/jvm/java-8-oracle/jre/lib/management/jmxremote.password.template
+/usr/lib/libreoffice/share/config/soffice.cfg/cui/ui/password.ui
+/usr/lib/libreoffice/share/config/soffice.cfg/dbaccess/ui/password.ui
+/usr/lib/libreoffice/share/config/soffice.cfg/modules/scalc/ui/retypepassworddialog.ui
+/usr/lib/libreoffice/share/config/soffice.cfg/sfx/ui/password.ui
+/usr/lib/libreoffice/share/config/soffice.cfg/uui/ui/masterpassworddlg.ui
+/usr/lib/libreoffice/share/config/soffice.cfg/uui/ui/password.ui
+/usr/lib/libreoffice/share/config/soffice.cfg/uui/ui/setmasterpassworddlg.ui
+/usr/lib/libreoffice/share/config/soffice.cfg/vcl/ui/cupspassworddialog.ui
+/usr/lib/pppd/2.4.7/passwordfd.so
+/usr/lib/python3/dist-packages/keyring/credentials.py
+/usr/lib/python3/dist-packages/keyring/__pycache__/credentials.cpython-38.pyc
+/usr/lib/python3/dist-packages/launchpadlib/credentials.py
+/usr/lib/python3/dist-packages/launchpadlib/__pycache__/credentials.cpython-38.pyc
+/usr/lib/python3/dist-packages/launchpadlib/tests/__pycache__/test_credential_store.cpython-38.pyc
+/usr/lib/python3/dist-packages/launchpadlib/tests/test_credential_store.py
+/usr/lib/python3/dist-packages/oauthlib/oauth2/rfc6749/grant_types/client_credentials.py
+/usr/lib/python3/dist-packages/oauthlib/oauth2/rfc6749/grant_types/__pycache__/client_credentials.cpython-38.pyc
+/usr/lib/python3/dist-packages/oauthlib/oauth2/rfc6749/grant_types/__pycache__/resource_owner_password_credentials.cpython-38.pyc
+/usr/lib/python3/dist-packages/oauthlib/oauth2/rfc6749/grant_types/resource_owner_password_credentials.py
+/usr/lib/python3/dist-packages/samba/credentials.cpython-38-x86_64-linux-gnu.so
+/usr/lib/python3/dist-packages/samba/tests/credentials.py
+/usr/lib/python3/dist-packages/samba/tests/krb5_credentials.py
+/usr/lib/python3/dist-packages/samba/tests/password_hash_fl2003.py
+/usr/lib/python3/dist-packages/samba/tests/password_hash_fl2008.py
+  #)There are more creds/passwds files in the previous parent folder
+
+/usr/lib/python3/dist-packages/samba/tests/__pycache__/krb5_credentials.cpython-38.pyc
+/usr/lib/python3/dist-packages/samba/tests/__pycache__/password_hash.cpython-38.pyc
+/usr/lib/python3/dist-packages/samba/tests/__pycache__/password_hash_fl2003.cpython-38.pyc
+  #)There are more creds/passwds files in the previous parent folder
+
+/usr/lib/python3/dist-packages/samba/tests/samba_tool/passwordsettings.py
+/usr/lib/python3/dist-packages/samba/tests/samba_tool/provision_password_check.py
+/usr/lib/python3/dist-packages/samba/tests/samba_tool/__pycache__/passwordsettings.cpython-38.pyc
+/usr/lib/python3/dist-packages/samba/tests/samba_tool/__pycache__/provision_password_check.cpython-38.pyc
+/usr/lib/python3/dist-packages/samba/tests/samba_tool/__pycache__/user_check_password_script.cpython-38.pyc
+
+╔══════════╣ Checking for TTY (sudo/su) passwords in audit logs
+
+╔══════════╣ Searching passwords inside logs (limit 70)
+[    1.542746] systemd[1]: Started Forward Password Requests to Wall Directory Watch.
+[    1.646466] systemd[1]: Started Forward Password Requests to Wall Directory Watch.
+2022-10-20 07:36:42 install base-passwd:amd64 <none> 3.5.47
+2022-10-20 07:36:42 status half-installed base-passwd:amd64 3.5.47
+2022-10-20 07:36:42 status unpacked base-passwd:amd64 3.5.47
+2022-10-20 07:36:43 configure base-passwd:amd64 3.5.47 3.5.47
+2022-10-20 07:36:43 status half-configured base-passwd:amd64 3.5.47
+2022-10-20 07:36:43 status installed base-passwd:amd64 3.5.47
+2022-10-20 07:36:46 status half-configured base-passwd:amd64 3.5.47
+2022-10-20 07:36:46 status half-installed base-passwd:amd64 3.5.47
+2022-10-20 07:36:46 status unpacked base-passwd:amd64 3.5.47
+2022-10-20 07:36:46 upgrade base-passwd:amd64 3.5.47 3.5.47
+2022-10-20 07:36:51 install passwd:amd64 <none> 1:4.8.1-1ubuntu5.20.04
+2022-10-20 07:36:51 status half-installed passwd:amd64 1:4.8.1-1ubuntu5.20.04
+2022-10-20 07:36:52 status unpacked passwd:amd64 1:4.8.1-1ubuntu5.20.04
+2022-10-20 07:36:55 configure base-passwd:amd64 3.5.47 <none>
+2022-10-20 07:36:55 status half-configured base-passwd:amd64 3.5.47
+2022-10-20 07:36:55 status installed base-passwd:amd64 3.5.47
+2022-10-20 07:36:55 status unpacked base-passwd:amd64 3.5.47
+2022-10-20 07:36:57 configure passwd:amd64 1:4.8.1-1ubuntu5.20.04 <none>
+2022-10-20 07:36:57 status half-configured passwd:amd64 1:4.8.1-1ubuntu5.20.04
+2022-10-20 07:36:57 status installed passwd:amd64 1:4.8.1-1ubuntu5.20.04
+2022-10-20 07:36:57 status unpacked passwd:amd64 1:4.8.1-1ubuntu5.20.04
+Coincidencia en el archivo binario /var/log/journal/834b55c22a114749b23a982f1e8714b4/system@0005eb733187616c-ad84f80bae65cd6c.journal~
+Coincidencia en el archivo binario /var/log/journal/834b55c22a114749b23a982f1e8714b4/system.journal
+Coincidencia en el archivo binario /var/log/journal/834b55c22a114749b23a982f1e8714b4/user-1000@0005eb73328cc038-d8bb2a9c2a62eec1.journal~
+Coincidencia en el archivo binario /var/log/journal/834b55c22a114749b23a982f1e8714b4/user-1000.journal
+Description: Set up users and passwords
+Generamos una password aleatoria
+Oct 20 09:55:36 educaandos chpasswd[456]: gkr-pam: couldn't update the login keyring password: no old password was entered
+Oct 20 09:55:36 educaandos chpasswd[456]: pam_unix(chpasswd:chauthtok): password changed for usuario
+Oct 20 09:55:36 educaandos kernel: [    2.582952] systemd[1]: Started Forward Password Requests to Wall Directory Watch.
+Oct 20 09:55:36 educaandos systemd[1]: Condition check resulted in Dispatch Password Requests to Console Directory Watch being skipped.
+Oct 20 09:55:36 educaandos systemd[1]: Started Forward Password Requests to Plymouth Directory Watch.
+Oct 20 09:55:54 educaandos gdm-password]: pam_unix(gdm-password:auth): Couldn't open /etc/securetty: No existe el archivo o el directorio
+Oct 20 09:55:56 educaandos gdm-password]: gkr-pam: gnome-keyring-daemon started properly and unlocked keyring
+Oct 20 09:55:56 educaandos gdm-password]: gkr-pam: stashed password to try later in open session
+Oct 20 09:55:56 educaandos gdm-password]: gkr-pam: unable to locate daemon control file
+Oct 20 09:55:56 educaandos gdm-password]: pam_unix(gdm-password:auth): Couldn't open /etc/securetty: No existe el archivo o el directorio
+Oct 20 09:55:56 educaandos gdm-password]: pam_unix(gdm-password:session): session opened for user usuario by (uid=0)
+Oct 20 09:55:57 educaandos /usr/lib/gdm3/gdm-x-session[1201]: dbus-update-activation-environment: setting PWD=/home/usuario
+Oct 20 09:56:51 educaandos chpasswd[450]: gkr-pam: couldn't update the login keyring password: no old password was entered
+Oct 20 09:56:51 educaandos chpasswd[450]: pam_unix(chpasswd:chauthtok): password changed for usuario
+Oct 20 09:56:51 educaandos kernel: [    1.682920] systemd[1]: Started Forward Password Requests to Wall Directory Watch.
+Oct 20 09:56:51 educaandos systemd[1]: Condition check resulted in Dispatch Password Requests to Console Directory Watch being skipped.
+Oct 20 09:56:51 educaandos systemd[1]: Started Forward Password Requests to Plymouth Directory Watch.
+Oct 20 10:00:01 educaandos gdm-password]: pam_unix(gdm-password:auth): Couldn't open /etc/securetty: No existe el archivo o el directorio
+Oct 20 10:00:03 educaandos gdm-password]: gkr-pam: gnome-keyring-daemon started properly and unlocked keyring
+Oct 20 10:00:03 educaandos gdm-password]: gkr-pam: stashed password to try later in open session
+Oct 20 10:00:03 educaandos gdm-password]: gkr-pam: unable to locate daemon control file
+Oct 20 10:00:03 educaandos gdm-password]: pam_unix(gdm-password:auth): Couldn't open /etc/securetty: No existe el archivo o el directorio
+Oct 20 10:00:03 educaandos gdm-password]: pam_unix(gdm-password:session): session opened for user usuario by (uid=0)
+Oct 20 10:00:04 educaandos /usr/lib/gdm3/gdm-x-session[1238]: dbus-update-activation-environment: setting PWD=/home/usuario
+Oct 20 10:24:41 educaandos chpasswd[438]: gkr-pam: couldn't update the login keyring password: no old password was entered
+Oct 20 10:24:41 educaandos chpasswd[438]: pam_unix(chpasswd:chauthtok): password changed for usuario
+Oct 20 10:24:41 educaandos kernel: [    1.432395] systemd[1]: Started Forward Password Requests to Wall Directory Watch.
+Oct 20 10:24:41 educaandos systemd[1]: Condition check resulted in Dispatch Password Requests to Console Directory Watch being skipped.
+Oct 20 10:24:41 educaandos systemd[1]: Started Forward Password Requests to Plymouth Directory Watch.
+Oct 20 10:24:56 educaandos gdm-password]: pam_unix(gdm-password:auth): Couldn't open /etc/securetty: No existe el archivo o el directorio
+Oct 20 10:24:58 educaandos gdm-password]: gkr-pam: gnome-keyring-daemon started properly and unlocked keyring
+Oct 20 10:24:58 educaandos gdm-password]: gkr-pam: stashed password to try later in open session
+Oct 20 10:24:58 educaandos gdm-password]: gkr-pam: unable to locate daemon control file
+Oct 20 10:24:58 educaandos gdm-password]: pam_unix(gdm-password:auth): Couldn't open /etc/securetty: No existe el archivo o el directorio
+Oct 20 10:24:58 educaandos gdm-password]: pam_unix(gdm-password:session): session opened for user usuario by (uid=0)
+Oct 20 10:24:59 educaandos /usr/lib/gdm3/gdm-x-session[1433]: dbus-update-activation-environment: setting PWD=/home/usuario
+Oct 20 10:34:29 educaandos chpasswd[426]: gkr-pam: couldn't update the login keyring password: no old password was entered
+Oct 20 10:34:29 educaandos chpasswd[426]: pam_unix(chpasswd:chauthtok): password changed for usuario
+Oct 20 10:34:29 educaandos kernel: [    2.130637] systemd[1]: Started Forward Password Requests to Wall Directory Watch.
+Oct 20 10:34:29 educaandos systemd[1]: Condition check resulted in Dispatch Password Requests to Console Directory Watch being skipped.
+Oct 20 10:34:29 educaandos systemd[1]: Started Forward Password Requests to Plymouth Directory Watch.
+
+
+
+100  808k  100  808k    0     0   9708      0  0:01:25  0:01:25 --:--:--  6214
+                                ╔════════════════╗
+════════════════════════════════╣ API Keys Regex ╠════════════════════════════════
+                                ╚════════════════╝
+Regexes to search for API keys aren't activated, use param '-r' 
+
