@@ -13,10 +13,10 @@ Versión de GNOME: 3.36.3
 
 ## Objetivos y descripción
 Se va a realizar la prueba de escalada de privilegios sobre el sistema operativo EducaAndOs, los fallos encontrados pueden que no sean revelantes o que en la realidad no sean de importancia, pero deben ser resueltos para conseguir un sistema seguro.
-La finalidad de esta prueba es asegurar que el sistema operativo, no tiene ningun agujero de seguridad y que no es una entrada para posibles ataques a redes con este sistema implantado y/o asegurar la integridad de los archivos confidenciales que se puedan almacenar en equipos con este sistema implantado.
+La finalidad de esta prueba es asegurar que el sistema operativo, no tiene ningún agujero de seguridad y que no es una entrada para posibles ataques a redes con este sistema implantado y/o asegurar la integridad de los archivos confidenciales que se puedan almacenar en equipos con este sistema implantado.
 
 ## Información adicional
-El sistema estará conectado a internet durante toda la prueba y se relizarán las actualizaciones pendientes. Para poder asegurar la integridad de este sistema y del equipo en el que se realize esta prueba, esta prueba se ha realizado en un entorno seguro y virtual.
+El sistema estará conectado a internet durante toda la prueba y se realizarán las actualizaciones pendientes. Para poder asegurar la integridad de este sistema y del equipo en el que se realize esta prueba, esta prueba se ha realizado en un entorno seguro y virtual.
 
 # PoC
 
@@ -116,14 +116,14 @@ Operating System:   GNU/Linux
     VERSION_CODENAME=focal
     UBUNTU_CODENAME=focal
 
-### !ATENCION¡¡: Se ha realizado un escaneo con un potente script de analisis, la respuesta es demasiado larga, por ello hay un archivo .txt que representa la salida de la consola de este script en el que descubren diferentes vulnerabilidades en las herramientas instaladas por defecto en la distribución. Revisar el archivo output.txt para mas información
+### !ATENCION¡¡: Se ha realizado un escaneo con un potente script de análisis, la respuesta es demasiado larga, por ello hay un archivo .txt que representa la salida de la consola de este script en el que descubren diferentes vulnerabilidades en las herramientas instaladas por defecto en la distribución. Revisar el archivo output.txt para más información
 
 ## Conclusion
 
-El sistema tiene multiples puntos vulnerables, la mayoria de ellos contemplan vulnerabilidades criticas. Para cualquier contacto:
+El sistema tiene múltiples puntos vulnerables, la mayoría de ellos contemplan vulnerabilidades críticas. Para mayor información:
 
-https://linktr.ee/nuofrwk
-Email: pabloarrabal@nuoframework.ml
+URL:    https://linktr.ee/nuofrwk
+Email:  pabloarrabal@nuoframework.ml
 Email2: nuoframework@protonmail.com
 
 
